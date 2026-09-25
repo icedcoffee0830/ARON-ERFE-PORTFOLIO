@@ -1,6 +1,6 @@
 import { site } from "@/content/site";
 import { coverShapeOf, coverShapes, disciplines, getProjects, type Discipline } from "@/content/projects";
-import { Hero, type HeroCover } from "@/components/Hero";
+import { Hero } from "@/components/Hero";
 import { DotField } from "@/components/DotField";
 import { WorkIndex } from "@/components/WorkIndex";
 import { About } from "@/components/About";
@@ -13,20 +13,12 @@ const pick = <T,>(f: (d: Discipline) => T) =>
 export default function Home() {
   const projects = getProjects();
 
-  // One cover per discipline: the first project listed in each.
-  const covers: HeroCover[] = keys.flatMap((d) => {
-    const p = projects.find((x) => x.discipline === d);
-    return p
-      ? [{ discipline: d, slug: p.slug, title: p.title, src: p.cover.src, alt: p.cover.alt, ratio: coverShapes[coverShapeOf(p)].ratio }]
-      : [];
-  });
-
   return (
     <>
       {/* The dot field sits behind the hero and fades out at the edges and towards the work. */}
       <div className="relative isolate">
-        <DotField className="absolute inset-0 -z-10 size-full [mask-image:radial-gradient(ellipse_90%_80%_at_50%_40%,black_45%,transparent_100%)]" />
-        <Hero intro={site.intro} words={pick((d) => disciplines[d].word)} covers={covers} />
+        <DotField className="absolute inset-0 -z-10 size-full [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,black_35%,transparent_100%)]" />
+        <Hero headline="Brand, interface and print." intro={site.intro} />
       </div>
       <WorkIndex
         items={projects.map((p) => ({

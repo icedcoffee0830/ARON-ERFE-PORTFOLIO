@@ -12,23 +12,20 @@ export const coverShapes: Record<CoverShape, { label: string; ratio: string; exa
 
 export const disciplines: Record<
   Discipline,
-  { label: string; word: string; description: string; shape: CoverShape }
+  { label: string; description: string; shape: CoverShape }
 > = {
   brand: {
     label: "Brand & identity",
-    word: "Brand",
     description: "Logotypes, visual systems and the rules that keep them consistent.",
     shape: "square",
   },
   ui: {
     label: "UI & product",
-    word: "interface",
     description: "Interfaces for apps and websites, from first flow to final screen.",
     shape: "landscape",
   },
   print: {
     label: "Graphic & print",
-    word: "print",
     description: "Posters, publications and editorial layouts made for paper.",
     shape: "portrait",
   },

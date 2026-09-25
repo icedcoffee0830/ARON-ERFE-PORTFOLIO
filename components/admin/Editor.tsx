@@ -310,7 +310,7 @@ export function Editor({
             </ol>
             {projects.length > 0 && (
               <p className="px-4 pb-6 text-[13px] leading-snug text-muted">
-                The order here is the order on your site. The first project of each discipline is its cover on the home page.
+                The order here is the order on your site. The middle project is shown first in the work carousel.
               </p>
             )}
           </nav>
