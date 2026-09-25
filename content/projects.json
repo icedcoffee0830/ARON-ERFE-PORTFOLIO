@@ -12,7 +12,7 @@
     ],
     "summary": "Sample project. An identity for a small ceramics studio, built around a stamped logotype.",
     "cover": {
-      "src": "https://picsum.photos/seed/harrow-cover/1400/1400",
+      "src": "/work/harrow-ceramics/mugunhul-aron.webp",
       "alt": "Placeholder cover"
     },
     "blocks": [
@@ -60,7 +60,7 @@
         }
       }
     ],
-    "draft": true
+    "draft": false
   },
   {
     "slug": "tempo",
