@@ -99,10 +99,10 @@ export default async function ProjectPage({ params }: Props) {
       </div>
 
       {next && next.slug !== project.slug && (
-        <nav aria-label="Next project" className="border-t border-line py-16 md:py-24">
+        <nav aria-label="Next project" className="border-t border-line py-10 md:py-14">
           <Link href={`/work/${next.slug}`} className="group block">
             <span className="text-sm text-muted">Next project</span>
-            <span className="mt-4 flex items-center gap-4 text-[clamp(2.25rem,5.5vw,5rem)] font-semibold leading-none tracking-[-0.045em] transition-colors duration-300 group-hover:text-accent">
+            <span className="mt-3 flex items-center gap-3 text-[clamp(1.5rem,2.6vw,2.25rem)] font-semibold leading-tight tracking-[-0.03em] transition-colors duration-300 group-hover:text-accent">
               {next.title}
               <ArrowRight
                 aria-hidden
@@ -165,6 +165,8 @@ function Frame({ img, priority, sizes }: { img: Img; priority?: boolean; sizes: 
 function BlockView({ block }: { block: Block }) {
   switch (block.type) {
     case "text":
+      // An empty text block (e.g. a heading with nothing written yet) stays off the page.
+      if (!block.body.trim()) return null;
       return (
         <Reveal className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-8">
           <h2 className="font-medium md:col-span-3">{block.heading}</h2>
