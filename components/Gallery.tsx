@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { easeIn, easeOut, springSoft } from "@/lib/motion";
 import { ArrowLeft, ArrowRight, X } from "@phosphor-icons/react";
 import type { Img } from "@/content/projects";
 
@@ -40,11 +41,14 @@ function toRows(images: Img[]) {
   return rows;
 }
 
-const ease = [0.16, 1, 0.3, 1] as const;
 
 export function Gallery({ images }: { images: Img[] }) {
   const shown = images.filter((i) => i.src);
   const [open, setOpen] = useState<number | null>(null);
+  // Where the viewer grows from: the tapped image's centre, in viewport percentages.
+  const [origin, setOrigin] = useState("50% 50%");
+  // The thumbnail that opened the viewer gets focus back when the viewer unmounts.
+  const opener = useRef<HTMLElement | null>(null);
   if (!shown.length) return null;
 
   return (
@@ -59,7 +63,7 @@ export function Gallery({ images }: { images: Img[] }) {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.8, ease }}
+              transition={{ duration: 0.8, ease: easeOut }}
               className="flex flex-col gap-4 md:mx-auto md:w-[var(--row-w)] md:flex-row md:gap-6"
               style={{ "--row-w": width ?? "100%" } as React.CSSProperties}
             >
@@ -67,7 +71,12 @@ export function Gallery({ images }: { images: Img[] }) {
                 <button
                   key={img.src + i}
                   type="button"
-                  onClick={() => setOpen(i)}
+                  onClick={(e) => {
+                    opener.current = e.currentTarget;
+                    const r = e.currentTarget.getBoundingClientRect();
+                    setOrigin(`${((r.left + r.width / 2) / window.innerWidth) * 100}% ${((r.top + r.height / 2) / window.innerHeight) * 100}%`);
+                    setOpen(i);
+                  }}
                   aria-label={`View image ${i + 1} of ${shown.length}${img.alt ? `: ${img.alt}` : ""}`}
                   className="group relative w-full cursor-zoom-in overflow-hidden bg-bg-sunk md:w-auto md:flex-[var(--r)_1_0%]"
                   style={{ aspectRatio: img.ratio ?? "4 / 3", "--r": r } as React.CSSProperties}
@@ -85,9 +94,20 @@ export function Gallery({ images }: { images: Img[] }) {
           );
         })}
       </div>
-      {open !== null && (
-        <Viewer images={shown} index={open} onIndex={setOpen} onClose={() => setOpen(null)} />
-      )}
+      {/* Kept mounted through its exit animation, then removed. */}
+      <AnimatePresence>
+        {open !== null && (
+          <Viewer
+            key="viewer"
+            images={shown}
+            index={open}
+            origin={origin}
+            returnFocus={opener}
+            onIndex={setOpen}
+            onClose={() => setOpen(null)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
@@ -95,35 +115,42 @@ export function Gallery({ images }: { images: Img[] }) {
 function Viewer({
   images,
   index,
+  origin,
+  returnFocus,
   onIndex,
   onClose,
 }: {
   images: Img[];
   index: number;
+  origin: string;
+  returnFocus: React.RefObject<HTMLElement | null>;
   onIndex: (i: number) => void;
   onClose: () => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const reduce = useReducedMotion();
   const many = images.length > 1;
   const go = useCallback(
     (d: 1 | -1) => onIndex((index + d + images.length) % images.length),
     [index, images.length, onIndex],
   );
 
-  // Native modal dialog: traps focus, closes on Escape, returns focus afterwards.
+  // Native modal dialog: traps focus; on unmount (after the exit animation, once the
+  // dialog has left the page and nothing is inert) focus returns to the thumbnail. Escape is routed
+  // through onClose (see onCancel) so the exit animation plays instead of a hard close.
   // Cleanup must not call close(): that fires onClose and would shut the viewer
   // straight after opening when React re-runs effects. Unmounting removes it anyway.
   useEffect(() => {
     const el = dialog.current;
-    const opener = document.activeElement as HTMLElement | null;
     if (el && !el.open) el.showModal();
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const target = returnFocus;
     return () => {
       document.body.style.overflow = prev;
-      opener?.focus?.({ preventScroll: true });
+      target.current?.focus({ preventScroll: true });
     };
-  }, []);
+  }, [returnFocus]);
 
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
@@ -140,13 +167,29 @@ function Viewer({
   return (
     <dialog
       ref={dialog}
+      onCancel={(e) => {
+        e.preventDefault();
+        onClose();
+      }}
       onClose={onClose}
-      onClick={(e) => e.target === e.currentTarget && onClose()}
       aria-label="Image viewer"
-      className="m-0 h-[100dvh] max-h-none w-screen max-w-none bg-[#0d0d0c]/95 p-0 text-[#ececea] backdrop:bg-transparent"
+      className="m-0 h-[100dvh] max-h-none w-screen max-w-none bg-transparent p-0 text-[#ececea] backdrop:bg-transparent"
     >
-      <div className="flex h-full flex-col" onClick={(e) => e.target === e.currentTarget && onClose()}>
-        <div className="flex h-16 shrink-0 items-center justify-between px-4 md:px-6">
+      {/* Backdrop: fades up on open, fades out a little faster on close. */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 bg-[#0d0d0c]/95"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: 0.3, ease: easeOut } }}
+        exit={{ opacity: 0, transition: { duration: 0.22, ease: easeIn } }}
+      />
+      <div className="relative flex h-full flex-col" onClick={(e) => e.target === e.currentTarget && onClose()}>
+        <motion.div
+          className="flex h-16 shrink-0 items-center justify-between px-4 md:px-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.25, delay: reduce ? 0 : 0.1 } }}
+          exit={{ opacity: 0, transition: { duration: 0.12 } }}
+        >
           <span className="font-mono text-sm text-[#9b9b96]" aria-live="polite">
             {many ? `${index + 1} / ${images.length}` : ""}
           </span>
@@ -159,17 +202,34 @@ function Viewer({
           >
             <X size={22} />
           </button>
-        </div>
+        </motion.div>
 
         <div className="relative min-h-0 flex-1 px-4 md:px-20" onClick={(e) => e.target === e.currentTarget && onClose()}>
+          {/* The image grows out of the thumbnail that was tapped and comes into focus.
+              Exit is smaller and quicker than the enter. */}
           <motion.div
-            key={img.src}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.25 }}
             className="relative size-full"
+            style={{ transformOrigin: origin }}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.92, filter: "blur(6px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)", transition: springSoft }}
+            exit={
+              reduce
+                ? { opacity: 0, transition: { duration: 0.15 } }
+                : { opacity: 0, scale: 0.98, filter: "blur(2px)", transition: { duration: 0.18, ease: easeIn } }
+            }
           >
-            <Image src={img.src} alt={img.alt} fill sizes="100vw" className="object-contain" />
+            {/* Stepping between images (often by keyboard) is a quick crossfade only. */}
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={img.src}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: 0.15 } }}
+                exit={{ opacity: 0, transition: { duration: 0.1 } }}
+              >
+                <Image src={img.src} alt={img.alt} fill sizes="100vw" className="object-contain" />
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
 
           {many && (
@@ -180,7 +240,14 @@ function Viewer({
           )}
         </div>
 
-        <p className="min-h-16 shrink-0 px-4 py-5 text-center text-sm text-[#9b9b96] md:px-6">{img.alt}</p>
+        <motion.p
+          className="min-h-16 shrink-0 px-4 py-5 text-center text-sm text-[#9b9b96] md:px-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.25, delay: 0.15 } }}
+          exit={{ opacity: 0, transition: { duration: 0.12 } }}
+        >
+          {img.alt}
+        </motion.p>
       </div>
     </dialog>
   );
@@ -189,15 +256,18 @@ function Viewer({
 function NavButton({ side, onClick }: { side: "left" | "right"; onClick: () => void }) {
   const Icon = side === "left" ? ArrowLeft : ArrowRight;
   return (
-    <button
+    <motion.button
       type="button"
       onClick={onClick}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.25, delay: 0.15 } }}
+      exit={{ opacity: 0, transition: { duration: 0.12 } }}
       aria-label={side === "left" ? "Previous image" : "Next image"}
       className={`absolute top-1/2 inline-flex size-12 -translate-y-1/2 items-center justify-center bg-[#0d0d0c]/60 transition-colors hover:bg-white/15 ${
         side === "left" ? "left-2 md:left-5" : "right-2 md:right-5"
       }`}
     >
       <Icon size={22} />
-    </button>
+    </motion.button>
   );
 }

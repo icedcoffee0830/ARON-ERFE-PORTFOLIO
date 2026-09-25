@@ -15,6 +15,7 @@ import { disciplines, type Project } from "@/content/projects";
 import type { Site } from "@/content/site";
 import { prepareImage } from "@/lib/admin/image";
 import { validate } from "@/lib/admin/validate";
+import { useConfirm } from "./Confirm";
 import { EditorContext, type EditorApi } from "./context";
 import { ProjectForm } from "./ProjectForm";
 import { SiteForm } from "./SiteForm";
@@ -69,6 +70,7 @@ export function Editor({
     return i >= 0 ? i : "site";
   });
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const confirm = useConfirm();
   const uploads = useRef<UploadRef[]>([]);
   const [previews, setPreviews] = useState<Record<string, string>>({});
   const main = useRef<HTMLDivElement>(null);
@@ -180,7 +182,16 @@ export function Editor({
   }
 
   async function signOut() {
-    if (dirty && !confirm("You have unsaved changes. Sign out anyway?")) return;
+    if (
+      dirty &&
+      !(await confirm({
+        title: "Sign out without saving?",
+        message: "You have unsaved changes. They will be lost if you sign out now.",
+        confirmLabel: "Sign out",
+        destructive: true,
+      }))
+    )
+      return;
     await fetch("/api/admin/logout", { method: "POST" });
     window.location.href = "/";
   }

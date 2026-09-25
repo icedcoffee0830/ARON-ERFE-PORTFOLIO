@@ -3,6 +3,7 @@ import { adminConfigured, isAuthed } from "@/lib/admin/auth";
 import { getStore, storeMode } from "@/lib/admin/store";
 import { Editor } from "@/components/admin/Editor";
 import { Login } from "@/components/admin/Login";
+import { ConfirmProvider } from "@/components/admin/Confirm";
 
 export const dynamic = "force-dynamic";
 
@@ -38,7 +39,11 @@ export default async function AdminPage({ searchParams }: Props) {
   try {
     const content = await getStore().read();
     const { project } = await searchParams;
-    return <Editor initial={content} mode={mode} focus={project} />;
+    return (
+      <ConfirmProvider>
+        <Editor initial={content} mode={mode} focus={project} />
+      </ConfirmProvider>
+    );
   } catch (e) {
     return <Notice title="Could not load your content">{(e as Error).message}</Notice>;
   }

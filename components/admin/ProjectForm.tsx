@@ -21,6 +21,7 @@ import {
 } from "@/content/projects";
 import { slugify } from "@/lib/admin/validate";
 import { GalleryField } from "./GalleryField";
+import { useConfirm } from "./Confirm";
 import { ImageField } from "./ImageField";
 import { VideoField } from "./VideoField";
 import { Button, IconButton, Select, TextArea, TextInput, Toggle } from "./ui";
@@ -46,6 +47,7 @@ export function ProjectForm({
   savedSlugs: string[];
 }) {
   const set = <K extends keyof Project>(k: K, v: Project[K]) => onChange({ ...p, [k]: v });
+  const confirm = useConfirm();
 
   function setTitle(title: string) {
     // Keep the address in step with the title until it has been edited by hand.
@@ -217,8 +219,14 @@ export function ProjectForm({
       <div className="border-t border-line pt-8">
         <Button
           variant="danger"
-          onClick={() => {
-            if (confirm(`Delete "${p.title || "this project"}"? This takes effect when you save.`)) onDelete();
+          onClick={async () => {
+            const ok = await confirm({
+              title: `Delete "${p.title || "this project"}"?`,
+              message: "It is removed from your site the next time you save.",
+              confirmLabel: "Delete project",
+              destructive: true,
+            });
+            if (ok) onDelete();
           }}
         >
           <Trash size={16} /> Delete project
