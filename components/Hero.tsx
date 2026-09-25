@@ -65,7 +65,7 @@ export function Hero({
     );
 
   return (
-    <section className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-12 px-4 pb-8 pt-12 md:px-8 lg:grid-cols-12 lg:gap-8 lg:pb-12 lg:pt-20">
+    <section className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-4 pb-6 pt-10 md:px-8 lg:grid-cols-12 lg:gap-8 lg:pb-12 lg:pt-20">
       <div className={covers.length ? "lg:col-span-7" : "lg:col-span-10"}>
         <motion.h1
           {...enter(0)}
@@ -93,10 +93,28 @@ export function Hero({
             Contact
           </Link>
         </motion.div>
+
+        {/* Phones: the covers as one tidy row, sharing a height and keeping their shapes. */}
+        {covers.length > 0 && (
+          <motion.ul {...enter(3)} className="mt-10 flex gap-2 lg:hidden">
+            {covers.map((c) => {
+              const [w, h] = c.ratio.split("/").map((n) => Number(n.trim()));
+              return (
+                <li key={c.slug} className="min-w-0" style={{ flex: `${w / h} 1 0%` }}>
+                  <Link href={`/work/${c.slug}`} aria-label={c.title} className="block">
+                    <div className="relative overflow-hidden bg-bg-sunk" style={{ aspectRatio: c.ratio }}>
+                      <Image src={c.src} alt={c.alt} fill priority sizes="45vw" className="object-cover" />
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </motion.ul>
+        )}
       </div>
 
       {covers.length > 0 && (
-        <div className="relative mx-auto aspect-[6/5] w-full max-w-[560px] lg:col-span-5 lg:max-w-none">
+        <div className="relative mx-auto hidden aspect-[6/5] w-full max-w-[560px] lg:col-span-5 lg:block lg:max-w-none">
           {covers.map((c, i) => {
             const p = placement[c.discipline];
             const isActive = active === c.discipline;

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
+import { MobileMenu } from "./MobileMenu";
 
 const items = [
   { href: "/#work", label: "Work" },
@@ -35,7 +36,7 @@ export function Nav() {
             site.name
           )}
         </Link>
-        <ul className="flex items-center gap-6 text-sm md:gap-10">
+        <ul className="hidden items-center gap-10 text-sm md:flex">
           {items.map((item) => (
             <li key={item.href}>
               <Link
@@ -47,6 +48,7 @@ export function Nav() {
             </li>
           ))}
         </ul>
+        <MobileMenu items={items} email={site.email} />
       </nav>
     </header>
   );

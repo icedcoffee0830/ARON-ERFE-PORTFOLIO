@@ -38,6 +38,7 @@ export function WorkIndex({
   const shown = filter === "all" ? items : items.filter((p) => p.discipline === filter);
   const track = useRef<HTMLUListElement>(null);
   const [ends, setEnds] = useState({ start: true, end: false });
+  const [current, setCurrent] = useState(0);
 
   const tabs: { key: Filter; label: string; count: number }[] = [
     { key: "all", label: "All", count: items.length },
@@ -48,13 +49,15 @@ export function WorkIndex({
     })),
   ];
 
-  // Only the two booleans live in state, and only update when they change.
+  // Only discrete values live in state (ends, centred index), updated only when they change.
   const measure = useCallback(() => {
     const el = track.current;
     if (!el) return;
     const start = el.scrollLeft <= 2;
     const end = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
     setEnds((e) => (e.start === start && e.end === end ? e : { start, end }));
+    const i = centred();
+    setCurrent((c) => (c === i ? c : i));
   }, []);
 
   useEffect(() => {
@@ -157,7 +160,7 @@ export function WorkIndex({
   };
 
   return (
-    <section id="work" className="pb-24 pt-16 md:pb-32 md:pt-20">
+    <section id="work" className="pb-16 pt-12 md:pb-32 md:pt-20">
       <div className="mx-auto max-w-[1400px] px-4 md:px-8">
         <div className="flex flex-col gap-8 border-t border-line pt-8 md:flex-row md:items-end md:justify-between">
           <h2 className="text-4xl font-semibold tracking-[-0.035em] md:text-5xl">Work</h2>
@@ -166,7 +169,7 @@ export function WorkIndex({
               <div
                 role="group"
                 aria-label="Filter by discipline"
-                className="-mx-4 flex min-w-0 gap-2 overflow-x-auto px-4 pb-1 md:mx-0 md:px-0"
+                className="flex min-w-0 flex-wrap gap-2"
               >
                 {tabs.map((t) => {
                   const on = filter === t.key;
@@ -239,9 +242,47 @@ export function WorkIndex({
         {/* Centred on the images (the caption and padding below add about 5.5rem). */}
         <ArrowButton side="left" label="Previous projects" hidden={ends.start} onClick={() => page(-1)} />
         <ArrowButton side="right" label="More projects" hidden={ends.end} onClick={() => page(1)} />
+        {/* Phones: position and arrows sit below the row instead of over the images. */}
+        <div className="mt-2 flex items-center justify-between px-4 md:hidden">
+          <span className="font-mono text-sm text-muted" aria-live="polite">
+            {Math.min(current + 1, shown.length)} / {shown.length}
+          </span>
+          <div className="flex gap-2">
+            <SmallArrow label="Previous project" disabled={ends.start} onClick={() => page(-1)}>
+              <ArrowLeft size={18} weight="bold" />
+            </SmallArrow>
+            <SmallArrow label="Next project" disabled={ends.end} onClick={() => page(1)}>
+              <ArrowRight size={18} weight="bold" />
+            </SmallArrow>
+          </div>
+        </div>
         </div>
       )}
     </section>
+  );
+}
+
+function SmallArrow({
+  label,
+  disabled,
+  onClick,
+  children,
+}: {
+  label: string;
+  disabled: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="inline-flex size-11 items-center justify-center border border-line transition-colors active:scale-[0.96] active:border-fg disabled:opacity-35"
+    >
+      {children}
+    </button>
   );
 }
 
@@ -264,7 +305,7 @@ function ArrowButton({
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : 0}
       onClick={onClick}
-      className={`absolute top-[calc(50%-2.75rem)] z-10 inline-flex size-12 -translate-y-1/2 items-center justify-center border border-line bg-bg/90 text-fg shadow-[0_12px_32px_-14px_rgb(0_0_0/0.55)] backdrop-blur-sm transition-[opacity,background-color,border-color] duration-300 hover:border-fg hover:bg-bg active:scale-[0.96] md:size-14 ${
+      className={`absolute top-[calc(50%-2.75rem)] z-10 hidden size-12 -translate-y-1/2 items-center justify-center border border-line bg-bg/90 text-fg shadow-[0_12px_32px_-14px_rgb(0_0_0/0.55)] backdrop-blur-sm transition-[opacity,background-color,border-color] duration-300 hover:border-fg hover:bg-bg active:scale-[0.96] md:inline-flex md:size-14 ${
         side === "left" ? "left-2 md:left-6" : "right-2 md:right-6"
       } ${hidden ? "pointer-events-none opacity-0" : "opacity-100"}`}
     >

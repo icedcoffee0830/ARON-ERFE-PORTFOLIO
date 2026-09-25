@@ -28,7 +28,7 @@ export function Contact({
   }
 
   return (
-    <section id="contact" className="mx-auto max-w-[1400px] px-4 py-20 md:px-8 md:py-28">
+    <section id="contact" className="mx-auto max-w-[1400px] px-4 py-16 md:px-8 md:py-28">
       <h2 className="text-4xl font-semibold tracking-[-0.035em] md:text-5xl">Contact</h2>
       <p className="mt-4 max-w-[44ch] text-lg text-muted">
         For projects, collaborations or just to talk about the work, email is best.

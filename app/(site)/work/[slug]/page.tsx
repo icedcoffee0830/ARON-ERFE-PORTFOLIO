@@ -92,7 +92,7 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       )}
 
-      <div className="flex flex-col gap-20 py-20 md:gap-32 md:py-32">
+      <div className="flex flex-col gap-12 py-12 md:gap-32 md:py-32">
         {project.blocks.map((b, i) => (
           <BlockView key={i} block={b} />
         ))}

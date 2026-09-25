@@ -14,11 +14,11 @@ export function About() {
 
   return (
     <section id="about" className="bg-bg-sunk">
-      <div className="mx-auto max-w-[1400px] px-4 py-24 md:px-8 md:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 py-16 md:px-8 md:py-32">
         <h2 className="sr-only">About</h2>
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
           {site.portrait && (
-            <Reveal className="md:col-span-4">
+            <Reveal className="max-w-[260px] md:col-span-4 md:max-w-none">
               <div className="relative aspect-[4/5] overflow-hidden bg-bg">
                 <Image
                   src={site.portrait}
@@ -36,7 +36,7 @@ export function About() {
                 {site.statement}
               </p>
             </Reveal>
-            <dl className="mt-14 grid gap-8 md:mt-20 md:grid-cols-[minmax(0,14rem)_1fr] md:gap-x-12">
+            <dl className="mt-12 grid gap-6 md:mt-20 md:gap-8 md:grid-cols-[minmax(0,14rem)_1fr] md:gap-x-12">
               {keys.map((d, i) => (
                 <Reveal
                   key={d}
@@ -52,7 +52,7 @@ export function About() {
         </div>
 
         {hasDetails && (
-          <div className="mt-20 grid grid-cols-1 gap-14 border-t border-line pt-12 md:mt-28 md:grid-cols-12 md:gap-8 md:pt-16">
+          <div className="mt-14 grid grid-cols-1 gap-12 border-t border-line pt-10 md:mt-28 md:grid-cols-12 md:gap-8 md:pt-16">
             {experience.length > 0 && (
               <Reveal className="md:col-span-6">
                 <h3 className="text-lg font-semibold tracking-tight">Experience</h3>
