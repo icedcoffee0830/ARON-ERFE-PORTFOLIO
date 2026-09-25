@@ -123,7 +123,7 @@
         }
       }
     ],
-    "draft": true
+    "draft": false
   },
   {
     "slug": "night-assembly",
@@ -185,7 +185,7 @@
         }
       }
     ],
-    "draft": true
+    "draft": false
   },
   {
     "slug": "verso-books",
@@ -248,7 +248,7 @@
         }
       }
     ],
-    "draft": true
+    "draft": false
   },
   {
     "slug": "waypoint",
@@ -310,7 +310,7 @@
         }
       }
     ],
-    "draft": true
+    "draft": false
   },
   {
     "slug": "specimen-vol-1",
@@ -373,6 +373,6 @@
         }
       }
     ],
-    "draft": true
+    "draft": false
   }
 ]
