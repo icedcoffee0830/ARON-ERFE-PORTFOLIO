@@ -409,7 +409,7 @@
         ]
       }
     ],
-    "draft": true,
+    "draft": false,
     "coverShape": "square"
   }
 ]
