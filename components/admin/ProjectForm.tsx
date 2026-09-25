@@ -6,6 +6,7 @@ import {
   ArrowUp,
   Images,
   TextT,
+  VideoCamera,
   Trash,
 } from "@phosphor-icons/react";
 import {
@@ -21,6 +22,7 @@ import {
 import { slugify } from "@/lib/admin/validate";
 import { GalleryField } from "./GalleryField";
 import { ImageField } from "./ImageField";
+import { VideoField } from "./VideoField";
 import { Button, IconButton, Select, TextArea, TextInput, Toggle } from "./ui";
 
 const blockNames: Record<Block["type"], string> = {
@@ -28,6 +30,7 @@ const blockNames: Record<Block["type"], string> = {
   image: "Image",
   pair: "Two images",
   gallery: "Images",
+  video: "Video",
 };
 
 export function ProjectForm({
@@ -63,6 +66,8 @@ export function ProjectForm({
         ? { type, heading: "", body: "" }
         : type === "gallery"
           ? { type, images: [] }
+          : type === "video"
+            ? { type, url: "" }
           : type === "image"
             ? { type, size: "full", image: { ...empty } }
             : { type, images: [{ ...empty }, { ...empty }] };
@@ -203,6 +208,9 @@ export function ProjectForm({
           <Button onClick={() => addBlock("gallery")}>
             <Images size={16} /> Add images
           </Button>
+          <Button onClick={() => addBlock("video")}>
+            <VideoCamera size={16} /> Add video
+          </Button>
         </div>
       </Section>
 
@@ -241,6 +249,7 @@ function BlockFields({
         <TextArea label="Text" rows={5} value={b.body} onChange={(body) => onChange({ ...b, body })} />
       </>
     );
+  if (b.type === "video") return <VideoField block={b} onChange={onChange} />;
   if (b.type === "gallery")
     return <GalleryField value={b.images} folder={folder} onChange={(images) => onChange({ ...b, images })} />;
   if (b.type === "image")

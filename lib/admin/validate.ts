@@ -1,5 +1,6 @@
 import type { Block, Img, Project } from "@/content/projects";
 import type { Site } from "@/content/site";
+import { parseVideo, videoShapes } from "@/lib/video";
 
 /*
   Checks content before it is saved. Runs in the editor (to show messages next to
@@ -85,5 +86,10 @@ function blockCheck(b: Block, where: string, out: string[]) {
       out.push(`${where}: add at least one image, or delete the block.`);
     else if (b.images.length > 60) out.push(`${where}: a gallery holds up to 60 images.`);
     else b.images.forEach((i, k) => img(i, `${where}, image ${k + 1}`, out));
+  } else if (b?.type === "video") {
+    if (!str(b.url, 500) || !parseVideo(b.url))
+      out.push(`${where}: paste a YouTube, Google Drive or Vimeo link.`);
+    if (b.ratio != null && !(b.ratio in videoShapes)) out.push(`${where}: choose a video shape.`);
+    if (b.caption != null && !str(b.caption, 300)) out.push(`${where}: the caption is too long.`);
   } else out.push(`${where}: unknown block type.`);
 }

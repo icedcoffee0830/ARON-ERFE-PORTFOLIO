@@ -15,6 +15,7 @@ import {
 } from "@/content/projects";
 import { Reveal } from "@/components/Reveal";
 import { Gallery } from "@/components/Gallery";
+import { VideoEmbed } from "@/components/VideoEmbed";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -180,6 +181,12 @@ function BlockView({ block }: { block: Block }) {
       );
     case "gallery":
       return <Gallery images={block.images} />;
+    case "video":
+      return (
+        <Reveal>
+          <VideoEmbed url={block.url} ratio={block.ratio} caption={block.caption} />
+        </Reveal>
+      );
     case "pair":
       return (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">

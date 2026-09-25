@@ -56,7 +56,9 @@ export type Block =
   | { type: "image"; image: Img; size?: "full" | "inset" }
   | { type: "pair"; images: [Img, Img] }
   /** Any number of images, laid out automatically by their proportions. */
-  | { type: "gallery"; images: Img[] };
+  | { type: "gallery"; images: Img[] }
+  /** A YouTube, Google Drive or Vimeo link. `ratio` is a VideoShape, e.g. "16 / 9". */
+  | { type: "video"; url: string; ratio?: string; caption?: string };
 
 export const GALLERY_MAX = 60;
 
