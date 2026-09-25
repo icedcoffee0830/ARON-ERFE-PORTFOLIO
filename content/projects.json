@@ -376,93 +376,6 @@
     "draft": true
   },
   {
-    "slug": "eat-and-munch",
-    "title": "Eat and Munch",
-    "discipline": "brand",
-    "year": 2026,
-    "role": "",
-    "deliverables": [],
-    "summary": "",
-    "cover": {
-      "src": "/work/eat-and-munch/muh3p6ft-mockup-storefront.webp",
-      "alt": "Eat and Munch"
-    },
-    "blocks": [
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3c0ni-eat-and-munch-branding-identity.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3pren-flyers-cookies-erfe.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3ptec-flyers.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          }
-        ]
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3a6ad-1.webp",
-            "alt": "",
-            "ratio": "2400 / 1697"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3a8hj-banner-mockup-1.webp",
-            "alt": "",
-            "ratio": "1200 / 857"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3aa89-banner-mockup-2.webp",
-            "alt": "",
-            "ratio": "3 / 2"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3bi14-mockup-1.webp",
-            "alt": "",
-            "ratio": "4 / 3"
-          }
-        ]
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3ajew-banner-1.webp",
-            "alt": "",
-            "ratio": "3 / 8"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3al14-banner-2.webp",
-            "alt": "",
-            "ratio": "3 / 8"
-          }
-        ]
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3bc23-mockup-signage.webp",
-            "alt": "",
-            "ratio": "400 / 267"
-          }
-        ]
-      }
-    ],
-    "draft": false,
-    "coverShape": "landscape"
-  },
-  {
     "slug": "buwan-ng-wika-2026",
     "title": "Buwan ng Wika 2026",
     "discipline": "print",
@@ -600,6 +513,93 @@
     ],
     "draft": false,
     "coverShape": "square"
+  },
+  {
+    "slug": "eat-and-munch",
+    "title": "Eat and Munch",
+    "discipline": "brand",
+    "year": 2026,
+    "role": "",
+    "deliverables": [],
+    "summary": "",
+    "cover": {
+      "src": "/work/eat-and-munch/muh3p6ft-mockup-storefront.webp",
+      "alt": "Eat and Munch"
+    },
+    "blocks": [
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3c0ni-eat-and-munch-branding-identity.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3pren-flyers-cookies-erfe.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3ptec-flyers.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3a6ad-1.webp",
+            "alt": "",
+            "ratio": "2400 / 1697"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3a8hj-banner-mockup-1.webp",
+            "alt": "",
+            "ratio": "1200 / 857"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3aa89-banner-mockup-2.webp",
+            "alt": "",
+            "ratio": "3 / 2"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3bi14-mockup-1.webp",
+            "alt": "",
+            "ratio": "4 / 3"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3ajew-banner-1.webp",
+            "alt": "",
+            "ratio": "3 / 8"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3al14-banner-2.webp",
+            "alt": "",
+            "ratio": "3 / 8"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3bc23-mockup-signage.webp",
+            "alt": "",
+            "ratio": "400 / 267"
+          }
+        ]
+      }
+    ],
+    "draft": false,
+    "coverShape": "landscape"
   },
   {
     "slug": "gorent",
@@ -792,5 +792,122 @@
     ],
     "draft": false,
     "coverShape": "landscape"
+  },
+  {
+    "slug": "joblink",
+    "title": "JobLink",
+    "discipline": "brand",
+    "year": 2026,
+    "role": "Graphic Design Intern",
+    "deliverables": [],
+    "summary": "",
+    "cover": {
+      "src": "/work/joblink/muh3usts-facebook-post-template.webp",
+      "alt": ""
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": ""
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/joblink/muh3v0o1-facebook-cover.webp",
+            "alt": "",
+            "ratio": "400 / 181"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/joblink/muh3vcj2-joblink-shirt-mockup-a-copy.webp",
+            "alt": "",
+            "ratio": "3 / 2"
+          },
+          {
+            "src": "/work/joblink/muh3ve2a-joblink-uniform-type-b.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/joblink/muh3vnl6-id-card-front.webp",
+            "alt": "",
+            "ratio": "1312 / 1655"
+          },
+          {
+            "src": "/work/joblink/muh3wo1d-id-card-back.webp",
+            "alt": "",
+            "ratio": "1312 / 1655"
+          },
+          {
+            "src": "/work/joblink/muh3vp1l-lanyard-id-joblink.webp",
+            "alt": "",
+            "ratio": "4 / 3"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/joblink/muh3w4wn-artboard-1.webp",
+            "alt": "",
+            "ratio": "298 / 421"
+          },
+          {
+            "src": "/work/joblink/muh3w5r9-artboard-129.webp",
+            "alt": "",
+            "ratio": "613 / 792"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/joblink/muh3xjlw-apple-app-store.webp",
+            "alt": "",
+            "ratio": "1109 / 2400"
+          },
+          {
+            "src": "/work/joblink/muh3xkww-google-play-store-copy-2.webp",
+            "alt": "",
+            "ratio": "1 / 2"
+          },
+          {
+            "src": "/work/joblink/muh3xlxb-google-play-store-copy-3.webp",
+            "alt": "",
+            "ratio": "1 / 2"
+          },
+          {
+            "src": "/work/joblink/muh3xmwd-google-play-store-copy.webp",
+            "alt": "",
+            "ratio": "1 / 2"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/joblink/muh3y4bl-roll-up-banner.webp",
+            "alt": "",
+            "ratio": "81 / 200"
+          }
+        ]
+      }
+    ],
+    "draft": false,
+    "coverShape": "square"
   }
 ]
