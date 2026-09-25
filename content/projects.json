@@ -376,6 +376,108 @@
     "draft": true
   },
   {
+    "slug": "eat-and-munch",
+    "title": "Eat and Munch",
+    "discipline": "brand",
+    "year": 2026,
+    "role": "",
+    "deliverables": [],
+    "summary": "",
+    "cover": {
+      "src": "/work/eat-and-munch/muh39pes-asset-1.webp",
+      "alt": "Eat and Munch"
+    },
+    "blocks": [
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3c0ni-eat-and-munch-branding-identity.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3a6ad-1.webp",
+            "alt": "",
+            "ratio": "2400 / 1697"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3a8hj-banner-mockup-1.webp",
+            "alt": "",
+            "ratio": "1200 / 857"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3aa89-banner-mockup-2.webp",
+            "alt": "",
+            "ratio": "3 / 2"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3bi14-mockup-1.webp",
+            "alt": "",
+            "ratio": "4 / 3"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Eat and Munch",
+        "body": ""
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3ajew-banner-1.webp",
+            "alt": "",
+            "ratio": "3 / 8"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3al14-banner-2.webp",
+            "alt": "",
+            "ratio": "3 / 8"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3b2pn-flyers-cookies-erfe.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3b4td-flyers.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/eat-and-munch/muh3bc23-mockup-signage.webp",
+            "alt": "",
+            "ratio": "400 / 267"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3bdr4-mockup-storefront.webp",
+            "alt": "",
+            "ratio": "3 / 2"
+          }
+        ]
+      }
+    ],
+    "draft": false,
+    "coverShape": "square"
+  },
+  {
     "slug": "buwan-ng-wika-2026",
     "title": "Buwan ng Wika 2026",
     "discipline": "print",
@@ -507,108 +609,6 @@
             "src": "/work/usep-lupad-2026/mugwbbot-dp-blast.webp",
             "alt": "USeP LUPAD 2026 DP BLAST",
             "ratio": "1 / 1"
-          }
-        ]
-      }
-    ],
-    "draft": false,
-    "coverShape": "square"
-  },
-  {
-    "slug": "eat-and-munch",
-    "title": "Eat and Munch",
-    "discipline": "brand",
-    "year": 2026,
-    "role": "",
-    "deliverables": [],
-    "summary": "",
-    "cover": {
-      "src": "/work/eat-and-munch/muh39pes-asset-1.webp",
-      "alt": "Eat and Munch"
-    },
-    "blocks": [
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3c0ni-eat-and-munch-branding-identity.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          }
-        ]
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3a6ad-1.webp",
-            "alt": "",
-            "ratio": "2400 / 1697"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3a8hj-banner-mockup-1.webp",
-            "alt": "",
-            "ratio": "1200 / 857"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3aa89-banner-mockup-2.webp",
-            "alt": "",
-            "ratio": "3 / 2"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3bi14-mockup-1.webp",
-            "alt": "",
-            "ratio": "4 / 3"
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "heading": "Eat and Munch",
-        "body": ""
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3ajew-banner-1.webp",
-            "alt": "",
-            "ratio": "3 / 8"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3al14-banner-2.webp",
-            "alt": "",
-            "ratio": "3 / 8"
-          }
-        ]
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3b2pn-flyers-cookies-erfe.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3b4td-flyers.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          }
-        ]
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
-            "src": "/work/eat-and-munch/muh3bc23-mockup-signage.webp",
-            "alt": "",
-            "ratio": "400 / 267"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3bdr4-mockup-storefront.webp",
-            "alt": "",
-            "ratio": "3 / 2"
           }
         ]
       }
