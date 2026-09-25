@@ -615,5 +615,197 @@
     ],
     "draft": false,
     "coverShape": "square"
+  },
+  {
+    "slug": "gorent",
+    "title": "GoRent",
+    "discipline": "brand",
+    "year": 2026,
+    "role": "",
+    "deliverables": [],
+    "summary": "",
+    "cover": {
+      "src": "/work/gorent/muh3eihr-title.webp",
+      "alt": ""
+    },
+    "blocks": [
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/gorent/muh3l53m-facebook-post.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": ""
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/gorent/muh3fhac-features.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3ggfb-vision-and-mission.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3fn9e-problem-statement-2.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3fqx9-problem-statement-3.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3fu51-problem-statement-4.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3fy19-problem-statement.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3g2ph-screens.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3g6me-solution.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/gorent/muh3gtu0-end.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/gorent/muh3jbfp-go-rent-shirt-mockup-a.webp",
+            "alt": "",
+            "ratio": "3 / 2"
+          },
+          {
+            "src": "/work/gorent/muh3jfcl-uniform-a.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "/work/gorent/muh3jd7n-lanyard-id.webp",
+            "alt": "",
+            "ratio": "4 / 3"
+          },
+          {
+            "src": "/work/gorent/muh3jtkc-car-sticker.webp",
+            "alt": "",
+            "ratio": "4 / 3"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/gorent/muh3hols-apple-app-store-copy-3.webp",
+            "alt": "",
+            "ratio": "1109 / 2400"
+          },
+          {
+            "src": "/work/gorent/muh3hng1-apple-app-store-copy-2.webp",
+            "alt": "",
+            "ratio": "1109 / 2400"
+          },
+          {
+            "src": "/work/gorent/muh3hqga-apple-app-store.webp",
+            "alt": "",
+            "ratio": "1109 / 2400"
+          },
+          {
+            "src": "/work/gorent/muh3hrux-google-play-store-copy-2.webp",
+            "alt": "",
+            "ratio": "1 / 2"
+          },
+          {
+            "src": "/work/gorent/muh3htxn-google-play-store.webp",
+            "alt": "",
+            "ratio": "1 / 2"
+          },
+          {
+            "src": "/work/gorent/muh3hph7-apple-app-store-copy.webp",
+            "alt": "",
+            "ratio": "1109 / 2400"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/gorent/muh3kgfw-flyer-1.webp",
+            "alt": "",
+            "ratio": "17 / 22"
+          },
+          {
+            "src": "/work/gorent/muh3ki3o-flyer-2.webp",
+            "alt": "",
+            "ratio": "1711 / 2400"
+          },
+          {
+            "src": "/work/gorent/muh3kjkj-flyer3.webp",
+            "alt": "",
+            "ratio": "337 / 480"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/gorent/muh3ls68-mockup-brochure-gorent.webp",
+            "alt": "",
+            "ratio": "2400 / 1697"
+          },
+          {
+            "src": "/work/gorent/muh3ltpw-playstore-mockup.webp",
+            "alt": "",
+            "ratio": "857 / 1200"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/gorent/muh3m9uc-booth-1.webp",
+            "alt": "",
+            "ratio": "4 / 3"
+          },
+          {
+            "src": "/work/gorent/muh3mcv1-booth-2.webp",
+            "alt": "",
+            "ratio": "4 / 3"
+          }
+        ]
+      }
+    ],
+    "draft": false,
+    "coverShape": "landscape"
   }
 ]
