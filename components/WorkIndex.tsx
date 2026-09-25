@@ -157,14 +157,6 @@ export function WorkIndex({
                   );
                 })}
               </div>
-              <div className="hidden shrink-0 gap-2 md:flex">
-                <ArrowButton label="Previous projects" disabled={ends.start} onClick={() => page(-1)}>
-                  <ArrowLeft size={18} weight="bold" />
-                </ArrowButton>
-                <ArrowButton label="More projects" disabled={ends.end} onClick={() => page(1)}>
-                  <ArrowRight size={18} weight="bold" />
-                </ArrowButton>
-              </div>
             </div>
           )}
         </div>
@@ -182,6 +174,7 @@ export function WorkIndex({
 
       {/* The track lines up with the page content (same gutters as the 1400px container) and runs to the screen edge. */}
       {items.length > 0 && (
+        <div className="relative mt-12 md:mt-16">
         <ul
           ref={track}
           aria-label="Projects"
@@ -191,7 +184,7 @@ export function WorkIndex({
           onPointerCancel={endDrag}
           onClickCapture={onClickCapture}
           onDragStart={(e) => e.preventDefault()}
-          className="mt-12 flex snap-x snap-mandatory items-start gap-5 overflow-x-auto overscroll-x-contain px-4 pb-4 scroll-px-4 [scrollbar-width:none] md:mt-16 md:cursor-grab md:gap-8 md:px-[max(2rem,calc((100%_-_1400px)/2_+_2rem))] md:scroll-px-[max(2rem,calc((100%_-_1400px)/2_+_2rem))] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory items-start gap-5 overflow-x-auto overscroll-x-contain px-4 pb-4 scroll-px-4 [scrollbar-width:none] md:cursor-grab md:gap-8 md:px-[max(2rem,calc((100%_-_1400px)/2_+_2rem))] md:scroll-px-[max(2rem,calc((100%_-_1400px)/2_+_2rem))] [&::-webkit-scrollbar]:hidden"
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {shown.map((p, i) => (
@@ -209,31 +202,39 @@ export function WorkIndex({
             ))}
           </AnimatePresence>
         </ul>
+        {/* Centred on the images (the caption and padding below add about 5.5rem). */}
+        <ArrowButton side="left" label="Previous projects" hidden={ends.start} onClick={() => page(-1)} />
+        <ArrowButton side="right" label="More projects" hidden={ends.end} onClick={() => page(1)} />
+        </div>
       )}
     </section>
   );
 }
 
 function ArrowButton({
+  side,
   label,
-  disabled,
+  hidden,
   onClick,
-  children,
 }: {
+  side: "left" | "right";
   label: string;
-  disabled: boolean;
+  hidden: boolean;
   onClick: () => void;
-  children: React.ReactNode;
 }) {
+  const Icon = side === "left" ? ArrowLeft : ArrowRight;
   return (
     <button
       type="button"
       aria-label={label}
-      disabled={disabled}
+      aria-hidden={hidden}
+      tabIndex={hidden ? -1 : 0}
       onClick={onClick}
-      className="inline-flex size-10 items-center justify-center border border-line transition-colors hover:border-fg active:scale-[0.96] disabled:pointer-events-none disabled:opacity-35"
+      className={`absolute top-[calc(50%-2.75rem)] z-10 inline-flex size-12 -translate-y-1/2 items-center justify-center border border-line bg-bg/90 text-fg shadow-[0_12px_32px_-14px_rgb(0_0_0/0.55)] backdrop-blur-sm transition-[opacity,background-color,border-color] duration-300 hover:border-fg hover:bg-bg active:scale-[0.96] md:size-14 ${
+        side === "left" ? "left-2 md:left-6" : "right-2 md:right-6"
+      } ${hidden ? "pointer-events-none opacity-0" : "opacity-100"}`}
     >
-      {children}
+      <Icon size={22} weight="bold" />
     </button>
   );
 }
