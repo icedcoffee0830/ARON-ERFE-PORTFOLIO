@@ -60,7 +60,7 @@
         }
       }
     ],
-    "draft": false
+    "draft": true
   },
   {
     "slug": "tempo",
@@ -123,7 +123,7 @@
         }
       }
     ],
-    "draft": false
+    "draft": true
   },
   {
     "slug": "night-assembly",
@@ -185,7 +185,7 @@
         }
       }
     ],
-    "draft": false
+    "draft": true
   },
   {
     "slug": "verso-books",
@@ -248,7 +248,7 @@
         }
       }
     ],
-    "draft": false
+    "draft": true
   },
   {
     "slug": "waypoint",
@@ -310,7 +310,7 @@
         }
       }
     ],
-    "draft": false
+    "draft": true
   },
   {
     "slug": "specimen-vol-1",
@@ -373,6 +373,43 @@
         }
       }
     ],
-    "draft": false
+    "draft": true
+  },
+  {
+    "slug": "buwan-ng-wika-2026",
+    "title": "Buwan ng Wika 2026",
+    "discipline": "print",
+    "year": 2026,
+    "role": "Main Graphic Designer",
+    "deliverables": [],
+    "summary": "",
+    "cover": {
+      "src": "/work/buwan-ng-wika-2026/mugw0htp-bnw-main-poster-alternate.webp",
+      "alt": ""
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": ""
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/buwan-ng-wika-2026/mugw11io-guidelines-1.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "/work/buwan-ng-wika-2026/mugw12z5-guidelines-2.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          }
+        ]
+      }
+    ],
+    "draft": true,
+    "coverShape": "square"
   }
 ]
