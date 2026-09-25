@@ -411,5 +411,107 @@
     ],
     "draft": false,
     "coverShape": "square"
+  },
+  {
+    "slug": "usep-lupad-2026",
+    "title": "USeP LUPAD 2026",
+    "discipline": "brand",
+    "year": 2026,
+    "role": "Main Graphic Designer",
+    "deliverables": [],
+    "summary": "",
+    "cover": {
+      "src": "/work/usep-lupad-2026/mugw84cw-main-poster-with-sponors.webp",
+      "alt": "LUPAD 2026 MAIN POSTER"
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "USeP LUPAD 2026",
+        "body": ""
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/usep-lupad-2026/mugw8sq6-lupad-2025-tarpulin2.webp",
+            "alt": "",
+            "ratio": "400 / 153"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/usep-lupad-2026/mugw92v4-profile-picture.webp",
+            "alt": "Tagum Student Council Profile Picture",
+            "ratio": "1 / 1"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/usep-lupad-2026/mugw9zig-k-store-8-s-yummy.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "/work/usep-lupad-2026/mugwa0ox-8-dona-swirl.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "/work/usep-lupad-2026/mugwa1oc-cd-petrol.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "/work/usep-lupad-2026/mugwa2u6-don-uno-pinutos.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "/work/usep-lupad-2026/mugwa3z6-dona-arabica-swirl-station.webp",
+            "alt": "",
+            "ratio": "1 / 1"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/usep-lupad-2026/mugwaelp-2.webp",
+            "alt": "",
+            "ratio": "1000 / 707"
+          },
+          {
+            "src": "/work/usep-lupad-2026/mugwag05-3.webp",
+            "alt": "",
+            "ratio": "1000 / 707"
+          },
+          {
+            "src": "/work/usep-lupad-2026/mugwahit-1.webp",
+            "alt": "",
+            "ratio": "1000 / 707"
+          }
+        ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/usep-lupad-2026/mugwbbot-dp-blast.webp",
+            "alt": "USeP LUPAD 2026 DP BLAST",
+            "ratio": "1 / 1"
+          }
+        ]
+      }
+    ],
+    "draft": false,
+    "coverShape": "square"
   }
 ]
