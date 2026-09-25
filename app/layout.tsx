@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Schibsted_Grotesk, Geist_Mono } from "next/font/google";
 import { site } from "@/content/site";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
 import "./globals.css";
 
@@ -33,11 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <MotionProvider>
-          <Nav />
-          <main id="main">{children}</main>
-          <Footer />
-        </MotionProvider>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

@@ -1,23 +1,20 @@
+import data from "./site.json";
+
 /**
- * Site-wide settings. Everything marked TODO is still undecided in PRODUCT.md
- * and must be confirmed by the owner before launch.
+ * Site-wide settings. Edit them at /admin, or directly in site.json.
  */
-export const site = {
-  // TODO: confirm display name.
-  name: "Aron",
-  role: "Designer",
-  intro:
-    "Aron is a designer making brand identities, product interfaces and printed matter.",
-  // TODO: replace with your own words. Keep it to what is true today.
-  statement:
-    "I design brand identities, digital product interfaces and printed matter. Each project gets the form its medium asks for: a system for a brand, a flow for a product, paper and ink for print.",
-  // TODO: add a real portrait at /public/portrait.jpg and set this to "/portrait.jpg". Leave null to hide it.
-  portrait: null as string | null,
-  // TODO: set the real contact address.
-  email: "hello@example.com",
-  // Add profiles as { label: "Instagram", href: "https://..." }. Empty entries are not rendered.
-  links: [] as { label: string; href: string }[],
-  // Sample projects are drafts. They show in `next dev` and are hidden from production builds
-  // unless this is true. Replace them with real work before flipping it.
-  showDraftsInProduction: false,
+export type Site = {
+  name: string;
+  role: string;
+  /** Sentence under the hero headline. */
+  intro: string;
+  /** Large paragraph in the About section. */
+  statement: string;
+  /** Path to a portrait in /public, e.g. "/portrait.webp". null hides it. */
+  portrait: string | null;
+  email: string;
+  /** Profile links shown under Contact. */
+  links: { label: string; href: string }[];
 };
+
+export const site: Site = data;

@@ -1,0 +1,378 @@
+[
+  {
+    "slug": "harrow-ceramics",
+    "title": "Harrow Ceramics",
+    "discipline": "brand",
+    "year": 2025,
+    "role": "Identity design",
+    "deliverables": [
+      "Logotype",
+      "Colour system",
+      "Packaging"
+    ],
+    "summary": "Sample project. An identity for a small ceramics studio, built around a stamped logotype.",
+    "cover": {
+      "src": "https://picsum.photos/seed/harrow-cover/1400/1400",
+      "alt": "Placeholder cover"
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": "Sample text. Describe who the client was, what they needed and what stood in the way."
+      },
+      {
+        "type": "image",
+        "size": "full",
+        "image": {
+          "src": "https://picsum.photos/seed/harrow-a/2000/1250",
+          "alt": "Placeholder image",
+          "ratio": "16 / 10"
+        }
+      },
+      {
+        "type": "pair",
+        "images": [
+          {
+            "src": "https://picsum.photos/seed/harrow-b/1400/1400",
+            "alt": "Placeholder image",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "https://picsum.photos/seed/harrow-c/1400/1400",
+            "alt": "Placeholder image",
+            "ratio": "1 / 1"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Approach",
+        "body": "Sample text. Explain the key decisions, what you tried and why the final direction won."
+      },
+      {
+        "type": "image",
+        "size": "inset",
+        "image": {
+          "src": "https://picsum.photos/seed/harrow-d/1600/1200",
+          "alt": "Placeholder image",
+          "ratio": "4 / 3"
+        }
+      }
+    ],
+    "draft": true
+  },
+  {
+    "slug": "tempo",
+    "title": "Tempo",
+    "discipline": "ui",
+    "year": 2025,
+    "role": "Product design",
+    "deliverables": [
+      "User flows",
+      "Interface design",
+      "Prototype"
+    ],
+    "summary": "Sample project. A training planner app for runners who follow a weekly plan.",
+    "cover": {
+      "src": "https://picsum.photos/seed/tempo-cover/1600/1000",
+      "alt": "Placeholder cover"
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": "Sample text. Describe the product, its users and the problem the interface had to solve."
+      },
+      {
+        "type": "image",
+        "size": "full",
+        "image": {
+          "src": "https://picsum.photos/seed/tempo-a/2000/1250",
+          "alt": "Placeholder image",
+          "ratio": "16 / 10"
+        }
+      },
+      {
+        "type": "pair",
+        "images": [
+          {
+            "src": "https://picsum.photos/seed/tempo-b/1600/1000",
+            "alt": "Placeholder image",
+            "ratio": "16 / 10"
+          },
+          {
+            "src": "https://picsum.photos/seed/tempo-c/1600/1000",
+            "alt": "Placeholder image",
+            "ratio": "16 / 10"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Approach",
+        "body": "Sample text. Walk through the flows, the constraints and what changed after testing."
+      },
+      {
+        "type": "image",
+        "size": "inset",
+        "image": {
+          "src": "https://picsum.photos/seed/tempo-d/1600/1200",
+          "alt": "Placeholder image",
+          "ratio": "4 / 3"
+        }
+      }
+    ],
+    "draft": true
+  },
+  {
+    "slug": "night-assembly",
+    "title": "Night Assembly",
+    "discipline": "print",
+    "year": 2024,
+    "role": "Poster design",
+    "deliverables": [
+      "Poster series",
+      "Typography"
+    ],
+    "summary": "Sample project. A series of posters for a run of late-night concerts.",
+    "cover": {
+      "src": "https://picsum.photos/seed/assembly-cover/1200/1500",
+      "alt": "Placeholder cover"
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": "Sample text. Describe the event, the audience and where the posters were seen."
+      },
+      {
+        "type": "image",
+        "size": "full",
+        "image": {
+          "src": "https://picsum.photos/seed/assembly-a/2000/1250",
+          "alt": "Placeholder image",
+          "ratio": "16 / 10"
+        }
+      },
+      {
+        "type": "pair",
+        "images": [
+          {
+            "src": "https://picsum.photos/seed/assembly-b/1200/1500",
+            "alt": "Placeholder image",
+            "ratio": "4 / 5"
+          },
+          {
+            "src": "https://picsum.photos/seed/assembly-c/1200/1500",
+            "alt": "Placeholder image",
+            "ratio": "4 / 5"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Approach",
+        "body": "Sample text. Explain the typographic idea and how it carried across the series."
+      },
+      {
+        "type": "image",
+        "size": "inset",
+        "image": {
+          "src": "https://picsum.photos/seed/assembly-d/1600/1200",
+          "alt": "Placeholder image",
+          "ratio": "4 / 3"
+        }
+      }
+    ],
+    "draft": true
+  },
+  {
+    "slug": "verso-books",
+    "title": "Verso Books",
+    "discipline": "brand",
+    "year": 2024,
+    "role": "Identity design",
+    "deliverables": [
+      "Wordmark",
+      "Signage",
+      "Stationery"
+    ],
+    "summary": "Sample project. A wordmark and signage system for an independent bookshop.",
+    "cover": {
+      "src": "https://picsum.photos/seed/verso-cover/1400/1400",
+      "alt": "Placeholder cover"
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": "Sample text. Describe the shop, its neighbourhood and what the old identity lacked."
+      },
+      {
+        "type": "image",
+        "size": "full",
+        "image": {
+          "src": "https://picsum.photos/seed/verso-a/2000/1250",
+          "alt": "Placeholder image",
+          "ratio": "16 / 10"
+        }
+      },
+      {
+        "type": "pair",
+        "images": [
+          {
+            "src": "https://picsum.photos/seed/verso-b/1400/1400",
+            "alt": "Placeholder image",
+            "ratio": "1 / 1"
+          },
+          {
+            "src": "https://picsum.photos/seed/verso-c/1400/1400",
+            "alt": "Placeholder image",
+            "ratio": "1 / 1"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Approach",
+        "body": "Sample text. Explain how the wordmark was drawn and how it moves onto signage."
+      },
+      {
+        "type": "image",
+        "size": "inset",
+        "image": {
+          "src": "https://picsum.photos/seed/verso-d/1600/1200",
+          "alt": "Placeholder image",
+          "ratio": "4 / 3"
+        }
+      }
+    ],
+    "draft": true
+  },
+  {
+    "slug": "waypoint",
+    "title": "Waypoint",
+    "discipline": "ui",
+    "year": 2024,
+    "role": "UI design",
+    "deliverables": [
+      "Web app",
+      "Design system"
+    ],
+    "summary": "Sample project. A parcel tracking web app and the component library behind it.",
+    "cover": {
+      "src": "https://picsum.photos/seed/waypoint-cover/1600/1000",
+      "alt": "Placeholder cover"
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": "Sample text. Describe who tracks parcels, how often, and what they needed to see first."
+      },
+      {
+        "type": "image",
+        "size": "full",
+        "image": {
+          "src": "https://picsum.photos/seed/waypoint-a/2000/1250",
+          "alt": "Placeholder image",
+          "ratio": "16 / 10"
+        }
+      },
+      {
+        "type": "pair",
+        "images": [
+          {
+            "src": "https://picsum.photos/seed/waypoint-b/1600/1000",
+            "alt": "Placeholder image",
+            "ratio": "16 / 10"
+          },
+          {
+            "src": "https://picsum.photos/seed/waypoint-c/1600/1000",
+            "alt": "Placeholder image",
+            "ratio": "16 / 10"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Approach",
+        "body": "Sample text. Explain the component decisions and how the system scaled across screens."
+      },
+      {
+        "type": "image",
+        "size": "inset",
+        "image": {
+          "src": "https://picsum.photos/seed/waypoint-d/1600/1200",
+          "alt": "Placeholder image",
+          "ratio": "4 / 3"
+        }
+      }
+    ],
+    "draft": true
+  },
+  {
+    "slug": "specimen-vol-1",
+    "title": "Specimen, Vol. 1",
+    "discipline": "print",
+    "year": 2023,
+    "role": "Editorial design",
+    "deliverables": [
+      "Booklet",
+      "Layout",
+      "Print production"
+    ],
+    "summary": "Sample project. A printed type specimen booklet, designed and produced by hand.",
+    "cover": {
+      "src": "https://picsum.photos/seed/specimen-cover/1200/1500",
+      "alt": "Placeholder cover"
+    },
+    "blocks": [
+      {
+        "type": "text",
+        "heading": "Brief",
+        "body": "Sample text. Describe what the booklet showcases and who it was made for."
+      },
+      {
+        "type": "image",
+        "size": "full",
+        "image": {
+          "src": "https://picsum.photos/seed/specimen-a/2000/1250",
+          "alt": "Placeholder image",
+          "ratio": "16 / 10"
+        }
+      },
+      {
+        "type": "pair",
+        "images": [
+          {
+            "src": "https://picsum.photos/seed/specimen-b/1200/1500",
+            "alt": "Placeholder image",
+            "ratio": "4 / 5"
+          },
+          {
+            "src": "https://picsum.photos/seed/specimen-c/1200/1500",
+            "alt": "Placeholder image",
+            "ratio": "4 / 5"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "heading": "Approach",
+        "body": "Sample text. Explain the grid, the paper choice and the production process."
+      },
+      {
+        "type": "image",
+        "size": "inset",
+        "image": {
+          "src": "https://picsum.photos/seed/specimen-d/1600/1200",
+          "alt": "Placeholder image",
+          "ratio": "4 / 3"
+        }
+      }
+    ],
+    "draft": true
+  }
+]
