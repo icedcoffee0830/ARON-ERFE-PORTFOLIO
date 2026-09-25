@@ -76,3 +76,43 @@ body {
     animation-duration: 0.01ms !important;
   }
 }
+
+/*
+  Hero headline: a slow monochrome sheen travels across the letters.
+  Uses the page's own tones, so it is black and grey in light mode and
+  white and grey in dark mode. A highlighted word keeps its solid accent colour.
+  Static for visitors who prefer reduced motion.
+*/
+.text-sheen {
+  background-image: linear-gradient(
+    100deg,
+    var(--fg) 0%,
+    var(--fg) 28%,
+    color-mix(in oklab, var(--fg) 35%, var(--bg)) 50%,
+    var(--fg) 72%,
+    var(--fg) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes sheen {
+  0% {
+    background-position: 100% 0;
+  }
+  60%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-sheen {
+    animation: none;
+    background-position: 0% 0;
+  }
+}

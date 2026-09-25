@@ -69,7 +69,7 @@ export function Hero({
       <div className={covers.length ? "lg:col-span-7" : "lg:col-span-10"}>
         <motion.h1
           {...enter(0)}
-          className="text-[clamp(2.75rem,5.6vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
+          className="text-sheen pb-2 text-[clamp(2.75rem,5.6vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
         >
           {word("brand")}, {word("ui")} and {word("print")}.
         </motion.h1>
