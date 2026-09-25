@@ -10,6 +10,7 @@ import {
   getProject,
   getProjects,
   type Block,
+  type Project,
   type Img,
 } from "@/content/projects";
 import { Reveal } from "@/components/Reveal";
@@ -26,12 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return project ? { title: project.title, description: project.summary } : {};
 }
 
-// How wide the cover sits on the project page, per shape. Tall shapes are
-// narrower so the cover never fills more than a screen.
-const coverWidth = {
-  landscape: "",
-  square: "md:ml-auto md:w-8/12",
-  portrait: "md:ml-auto md:w-7/12",
+// Landscape covers run full width below the details. Square and portrait covers
+// sit beside them instead, with the details kept in view as the cover scrolls past.
+const beside = {
+  square: "md:col-span-8",
+  portrait: "md:col-span-7 md:col-start-6",
 } as const;
 
 export default async function ProjectPage({ params }: Props) {
@@ -50,7 +50,7 @@ export default async function ProjectPage({ params }: Props) {
           role="note"
           className="mt-6 border border-accent px-4 py-3 text-sm text-accent"
         >
-          Placeholder project. Replace it with real work in content/projects.ts.
+          Hidden project. Only you can see this page; switch on "Show on the live site" in the editor to publish it.
         </p>
       )}
 
@@ -65,30 +65,31 @@ export default async function ProjectPage({ params }: Props) {
         <h1 className="mt-10 text-[clamp(2.75rem,7vw,6.5rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
           {project.title}
         </h1>
-        <div className="mt-10 grid grid-cols-1 gap-10 md:mt-14 md:grid-cols-12 md:gap-8">
-          <p className="max-w-[40ch] text-xl leading-relaxed md:col-span-6 md:text-2xl md:leading-snug">
-            {project.summary}
-          </p>
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-6 text-sm md:col-span-5 md:col-start-8">
-            <Meta label="Discipline">{disciplines[project.discipline].label}</Meta>
-            <Meta label="Year">
-              <span className="font-mono">{project.year}</span>
-            </Meta>
-            <Meta label="Role">{project.role}</Meta>
-            <Meta label="Deliverables">
-              <ul>
-                {project.deliverables.map((d) => (
-                  <li key={d}>{d}</li>
-                ))}
-              </ul>
-            </Meta>
-          </dl>
-        </div>
+        {shape === "landscape" && (
+          <div className="mt-10 grid grid-cols-1 gap-10 md:mt-14 md:grid-cols-12 md:gap-8">
+            <Summary text={project.summary} className="md:col-span-6" />
+            <Details project={project} className="md:col-span-5 md:col-start-8" />
+          </div>
+        )}
       </header>
 
-      <div className={coverWidth[shape]}>
-        <Frame img={{ ...project.cover, ratio: coverShapes[shape].ratio }} priority sizes="(min-width: 768px) 90vw, 100vw" />
-      </div>
+      {shape === "landscape" ? (
+        <Frame img={{ ...project.cover, ratio: coverShapes.landscape.ratio }} priority sizes="(min-width: 768px) 90vw, 100vw" />
+      ) : (
+        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-12 md:gap-8">
+          <div className="flex flex-col gap-10 md:sticky md:top-24 md:col-span-4">
+            <Summary text={project.summary} />
+            <Details project={project} />
+          </div>
+          <div className={beside[shape]}>
+            <Frame
+              img={{ ...project.cover, ratio: coverShapes[shape].ratio }}
+              priority
+              sizes="(min-width: 768px) 60vw, 100vw"
+            />
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-col gap-20 py-20 md:gap-32 md:py-32">
         {project.blocks.map((b, i) => (
@@ -112,6 +113,34 @@ export default async function ProjectPage({ params }: Props) {
         </nav>
       )}
     </article>
+  );
+}
+
+function Summary({ text, className = "" }: { text: string; className?: string }) {
+  if (!text) return null;
+  return (
+    <p className={`max-w-[40ch] text-xl leading-relaxed md:text-2xl md:leading-snug ${className}`}>{text}</p>
+  );
+}
+
+function Details({ project, className = "" }: { project: Project; className?: string }) {
+  return (
+    <dl className={`grid grid-cols-2 gap-x-8 gap-y-6 text-sm ${className}`}>
+      <Meta label="Discipline">{disciplines[project.discipline].label}</Meta>
+      <Meta label="Year">
+        <span className="font-mono">{project.year}</span>
+      </Meta>
+      {project.role && <Meta label="Role">{project.role}</Meta>}
+      {project.deliverables.length > 0 && (
+        <Meta label="Deliverables">
+          <ul>
+            {project.deliverables.map((d) => (
+              <li key={d}>{d}</li>
+            ))}
+          </ul>
+        </Meta>
+      )}
+    </dl>
   );
 }
 
