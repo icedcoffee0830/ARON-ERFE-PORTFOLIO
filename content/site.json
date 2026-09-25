@@ -1,12 +1,21 @@
 {
   "name": "Aron",
   "role": "Designer",
-  "logo": null,
-  "logoDark": null,
-  "showNameWithLogo": false,
+  "logo": "/logo-mugux97d.webp",
+  "logoDark": "/logo-dark-muguxgof.webp",
+  "showNameWithLogo": true,
   "intro": "Aron is a designer making brand identities, product interfaces and printed matter.",
   "statement": "I design brand identities, digital product interfaces and printed matter. Each project gets the form its medium asks for: a system for a brand, a flow for a product, paper and ink for print.",
   "portrait": "/portrait-mugumev1.webp",
-  "email": "hello@example.com",
-  "links": []
+  "email": "aronerfe0830@gmail.com",
+  "links": [
+    {
+      "label": "Behance",
+      "href": "https://www.behance.net/gallery/256230021/ARON-ERFE-2026-PORTFOLIO"
+    },
+    {
+      "label": "Facebook",
+      "href": "https://www.facebook.com/aron.erfe.5"
+    }
+  ]
 }
