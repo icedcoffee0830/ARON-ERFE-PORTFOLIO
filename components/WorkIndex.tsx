@@ -76,15 +76,48 @@ export function WorkIndex({
     };
   }, [measure, shown.length]);
 
+  // Cards in the current filter, looked up by project. Cards still fading out from
+  // the previous filter stay in the DOM briefly and must not be counted.
+  const slugs = useRef<string[]>([]);
+  slugs.current = shown.map((p) => p.slug);
+  const cards = () =>
+    slugs.current
+      .map((slug) => track.current?.querySelector<HTMLElement>(`li[data-card="${slug}"]`))
+      .filter((c): c is HTMLElement => Boolean(c));
+
+  // Scrolls so card i sits in the middle of the track. The track is `relative`, so card
+  // offsets are measured in its own scroll coordinates rather than the scrolled view.
+  const centerOn = useCallback((i: number, behavior: ScrollBehavior) => {
+    const el = track.current;
+    const card = cards()[i];
+    if (!el || !card) return;
+    el.scrollTo({ left: card.offsetLeft + card.offsetWidth / 2 - el.clientWidth / 2, behavior });
+  }, []);
+
+  // The card currently closest to the middle.
+  function centred() {
+    const el = track.current;
+    if (!el) return 0;
+    const mid = el.scrollLeft + el.clientWidth / 2;
+    const dist = cards().map((c) => Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid));
+    return dist.indexOf(Math.min(...dist));
+  }
+
+  // Open on the middle project, so there is work on both sides. Re-centre when the filter changes.
+  const first = useRef(true);
+  useEffect(() => {
+    const behavior: ScrollBehavior = first.current ? "instant" : "smooth";
+    first.current = false;
+    const id = requestAnimationFrame(() => centerOn(Math.floor((shown.length - 1) / 2), behavior));
+    return () => cancelAnimationFrame(id);
+  }, [filter, shown.length, centerOn]);
+
   function pick(f: Filter) {
     setFilter(f);
-    track.current?.scrollTo({ left: 0, behavior: "smooth" });
   }
 
   function page(dir: 1 | -1) {
-    const el = track.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+    centerOn(Math.min(Math.max(centred() + dir, 0), shown.length - 1), "smooth");
   }
 
   // Mouse drag to scroll. Touch and trackpads already scroll natively.
@@ -172,7 +205,7 @@ export function WorkIndex({
         )}
       </div>
 
-      {/* The track lines up with the page content (same gutters as the 1400px container) and runs to the screen edge. */}
+      {/* Full-width track; the centred card is the focus, with neighbours visible on both sides. Side padding lets the first and last cards reach the middle. */}
       {items.length > 0 && (
         <div className="relative mt-12 md:mt-16">
         <ul
@@ -184,7 +217,7 @@ export function WorkIndex({
           onPointerCancel={endDrag}
           onClickCapture={onClickCapture}
           onDragStart={(e) => e.preventDefault()}
-          className="flex snap-x snap-mandatory items-start gap-5 overflow-x-auto overscroll-x-contain px-4 pb-4 scroll-px-4 [scrollbar-width:none] md:cursor-grab md:gap-8 md:px-[max(2rem,calc((100%_-_1400px)/2_+_2rem))] md:scroll-px-[max(2rem,calc((100%_-_1400px)/2_+_2rem))] [&::-webkit-scrollbar]:hidden"
+          className="relative flex snap-x snap-mandatory items-start gap-5 overflow-x-auto overscroll-x-contain px-[7.5vw] pb-4 [scrollbar-width:none] md:cursor-grab md:gap-8 md:px-[calc(50%_-_280px)] [&::-webkit-scrollbar]:hidden"
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {shown.map((p, i) => (
@@ -195,7 +228,8 @@ export function WorkIndex({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.5, ease }}
-                className="shrink-0 snap-start"
+                data-card={p.slug}
+                className="shrink-0 snap-center"
               >
                 <Card item={p} label={labels[p.discipline]} priority={i < 3} />
               </motion.li>
