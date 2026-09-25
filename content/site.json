@@ -5,8 +5,36 @@
   "logoDark": "/logo-dark-muguxgof.webp",
   "showNameWithLogo": true,
   "intro": "Aron is a designer making brand identities, product interfaces and printed matter.",
-  "statement": "I design brand identities, digital product interfaces and printed matter. Each project gets the form its medium asks for: a system for a brand, a flow for a product, paper and ink for print.",
+  "statement": "Hello, I am Aron Erfe, a passionate graphic designer dedicated to bringing your ideas to life through captivating visuals. With a focus on simplicity and impact, I specialize in crafting visual stories that resonate and inspire. Let's collaborate to create something extraordinary together.",
   "portrait": "/portrait-mugumev1.webp",
+  "skills": [
+    "Enhanced Communication Skills",
+    "Team-Oriented",
+    "Adaptable",
+    "Leadership-Driven",
+    "Innovative",
+    "Creative"
+  ],
+  "experience": [
+    {
+      "title": "Senior High School Graduate",
+      "detail": "Tagum National Trade School, major in Visual Graphics Design (NC III)"
+    },
+    {
+      "title": "Graphic Design Intern",
+      "detail": "GoRide Integrated Systems Corporation"
+    },
+    {
+      "title": "Graphic Designer, Creatives Committee",
+      "detail": "TEDx Lanang Ave, on behalf of GoRide Integrated Systems Corporation"
+    }
+  ],
+  "software": [
+    "Photoshop",
+    "Illustrator",
+    "Premiere Pro",
+    "After Effects"
+  ],
   "email": "aronerfe0830@gmail.com",
   "links": [
     {

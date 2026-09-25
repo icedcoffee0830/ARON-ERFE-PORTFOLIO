@@ -42,6 +42,19 @@ export function validate(site: Site, projects: Project[]): string[] {
   if (site.portrait != null && !src(site.portrait)) out.push("Site details: invalid portrait.");
   if (site.logo != null && !src(site.logo)) out.push("Site details: invalid logo.");
   if (site.logoDark != null && !src(site.logoDark)) out.push("Site details: invalid dark mode logo.");
+  const list = <T,>(v: T[] | undefined) => v ?? [];
+  if (!Array.isArray(list(site.skills)) || list(site.skills).length > 30 || !list(site.skills).every((s) => str(s, 60)))
+    out.push("Site details: soft skills are too long (up to 30, 60 characters each).");
+  if (!Array.isArray(list(site.software)) || list(site.software).length > 30 || !list(site.software).every((s) => str(s, 40)))
+    out.push("Site details: software list is too long (up to 30, 40 characters each).");
+  if (!Array.isArray(list(site.experience)) || list(site.experience).length > 30)
+    out.push("Site details: up to 30 experience entries.");
+  else
+    list(site.experience).forEach((e, i) => {
+      if (!str(e?.title, 160) || !e.title.trim()) out.push(`Experience ${i + 1}: add a title.`);
+      if (e?.detail != null && !str(e.detail, 400)) out.push(`Experience ${i + 1}: the details are too long.`);
+      if (e?.period != null && !str(e.period, 40)) out.push(`Experience ${i + 1}: the year is too long.`);
+    });
   if (!Array.isArray(site.links)) out.push("Site details: invalid links.");
   else
     site.links.forEach((l, i) => {

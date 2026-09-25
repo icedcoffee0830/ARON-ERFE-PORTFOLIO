@@ -18,6 +18,12 @@ export type Site = {
   statement: string;
   /** Path to a portrait in /public, e.g. "/portrait.webp". null hides it. */
   portrait: string | null;
+  /** Soft skills, shown as tags in the About section. */
+  skills: string[];
+  /** Experience entries, newest first. `detail` and `period` are optional. */
+  experience: { title: string; detail?: string; period?: string }[];
+  /** Software names, shown as lettered tiles. See lib/software.ts. */
+  software: string[];
   email: string;
   /** Profile links shown under Contact. */
   links: { label: string; href: string }[];

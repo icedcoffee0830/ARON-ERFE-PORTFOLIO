@@ -2,6 +2,7 @@
 
 import { Plus, Trash } from "@phosphor-icons/react";
 import type { Site } from "@/content/site";
+import { AboutFields } from "./AboutFields";
 import { ImageField } from "./ImageField";
 import { Button, IconButton, TextArea, TextInput, Toggle } from "./ui";
 
@@ -36,6 +37,14 @@ export function SiteForm({ site, onChange }: { site: Site; onChange: (s: Site) =
           value={site.statement}
           onChange={(v) => set("statement", v)}
         />
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <div>
+          <h2 className="text-lg font-semibold tracking-tight">About details</h2>
+          <p className="mt-1 text-sm text-muted">Shown in the About section, below your statement. Leave any part empty to hide it.</p>
+        </div>
+        <AboutFields site={site} onChange={onChange} />
       </section>
 
       <section className="flex flex-col gap-6">

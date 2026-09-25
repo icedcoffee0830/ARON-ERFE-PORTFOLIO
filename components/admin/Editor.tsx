@@ -29,6 +29,21 @@ type Status =
   | { kind: "error"; messages: string[] };
 
 /** Trims the things forms leave behind (blank deliverable lines, stray spaces). */
+function tidySite(site: Site): Site {
+  return {
+    ...site,
+    skills: (site.skills ?? []).map((s) => s.trim()).filter(Boolean),
+    experience: (site.experience ?? [])
+      .map((e) => ({
+        title: e.title.trim(),
+        ...(e.detail?.trim() ? { detail: e.detail.trim() } : {}),
+        ...(e.period?.trim() ? { period: e.period.trim() } : {}),
+      }))
+      .filter((e) => e.title),
+    software: (site.software ?? []).map((s) => s.trim()).filter(Boolean),
+  };
+}
+
 function tidy(projects: Project[]): Project[] {
   return projects.map((p) => ({
     ...p,
@@ -131,7 +146,8 @@ export function Editor({
 
   async function save() {
     const clean = tidy(projects);
-    const problems = validate(site, clean);
+    const cleanSite = tidySite(site);
+    const problems = validate(cleanSite, clean);
     if (problems.length) {
       setStatus({ kind: "error", messages: problems });
       return;
@@ -141,12 +157,13 @@ export function Editor({
       const res = await fetch("/api/admin/content", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ site, projects: clean, uploads: uploads.current }),
+        body: JSON.stringify({ site: cleanSite, projects: clean, uploads: uploads.current }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error ?? "Saving failed.");
       setProjects(clean);
-      setSaved(JSON.stringify({ site, projects: clean }));
+      setSite(cleanSite);
+      setSaved(JSON.stringify({ site: cleanSite, projects: clean }));
       uploads.current = [];
       setStatus(
         data.mode === "github"
