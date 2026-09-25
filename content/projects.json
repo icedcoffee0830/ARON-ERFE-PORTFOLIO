@@ -802,15 +802,10 @@
     "deliverables": [],
     "summary": "",
     "cover": {
-      "src": "/work/joblink/muh3usts-facebook-post-template.webp",
-      "alt": ""
+      "src": "/work/joblink/muh40n3w-title.webp",
+      "alt": "Joblink"
     },
     "blocks": [
-      {
-        "type": "text",
-        "heading": "Brief",
-        "body": ""
-      },
       {
         "type": "gallery",
         "images": [
@@ -905,9 +900,54 @@
             "ratio": "81 / 200"
           }
         ]
+      },
+      {
+        "type": "gallery",
+        "images": [
+          {
+            "src": "/work/joblink/muh44ayb-end.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/joblink/muh41bcy-screens.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/joblink/muh42979-solution.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/joblink/muh41cvq-vision-and-mission.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/joblink/muh41a5b-problem-statement.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/joblink/muh417fd-problem-statement-3.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/joblink/muh418x1-problem-statement-4.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          },
+          {
+            "src": "/work/joblink/muh41zyp-features.webp",
+            "alt": "",
+            "ratio": "16 / 9"
+          }
+        ]
       }
     ],
     "draft": false,
-    "coverShape": "square"
+    "coverShape": "landscape"
   }
 ]
