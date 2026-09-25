@@ -64,6 +64,8 @@ export function validate(site: Site, projects: Project[]): string[] {
     if (!Array.isArray(p.deliverables) || !p.deliverables.every((d) => str(d, 80)))
       out.push(`${name}: invalid deliverables.`);
     img(p.cover, `${name}, cover`, out);
+    if (p.coverShape != null && !["square", "landscape", "portrait"].includes(p.coverShape))
+      out.push(`${name}: choose a cover shape.`);
     if (!Array.isArray(p.blocks)) out.push(`${name}: invalid content blocks.`);
     else p.blocks.forEach((b: Block, j) => blockCheck(b, `${name}, block ${j + 1}`, out));
   });

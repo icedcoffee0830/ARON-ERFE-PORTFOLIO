@@ -24,7 +24,8 @@ export function ImageField({
 }: {
   label: string;
   value: Img;
-  onChange: (v: Img) => void;
+  /** `upload` is set when the change came from a new upload, with the image's size. */
+  onChange: (v: Img, upload?: { width: number; height: number }) => void;
   /** Project slug (or "portrait"). */
   folder: string;
   /** When set, the frame is decided elsewhere (e.g. by discipline) and no ratio picker is shown. */
@@ -54,11 +55,14 @@ export function ImageField({
     setError(null);
     try {
       const up = await upload(file, folder);
-      onChange({
-        ...value,
-        src: up.path,
-        ratio: fixedRatio ? value.ratio : ratioOf(up.width, up.height),
-      });
+      onChange(
+        {
+          ...value,
+          src: up.path,
+          ratio: fixedRatio ? value.ratio : ratioOf(up.width, up.height),
+        },
+        { width: up.width, height: up.height },
+      );
     } catch (e) {
       setError((e as Error).message);
     } finally {

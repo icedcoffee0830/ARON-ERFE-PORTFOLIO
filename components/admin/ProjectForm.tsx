@@ -9,7 +9,16 @@ import {
   TextT,
   Trash,
 } from "@phosphor-icons/react";
-import { disciplines, type Block, type Discipline, type Project } from "@/content/projects";
+import {
+  coverShapeOf,
+  coverShapes,
+  disciplines,
+  nearestShape,
+  type Block,
+  type CoverShape,
+  type Discipline,
+  type Project,
+} from "@/content/projects";
 import { slugify } from "@/lib/admin/validate";
 import { ImageField } from "./ImageField";
 import { Button, IconButton, Select, TextArea, TextInput, Toggle } from "./ui";
@@ -58,6 +67,7 @@ export function ProjectForm({
   };
 
   const folder = p.slug || "untitled";
+  const shape = coverShapeOf(p);
   const live = savedSlugs.includes(p.slug) && !p.draft;
 
   return (
@@ -133,14 +143,18 @@ export function ProjectForm({
         />
       </Section>
 
-      <Section title="Cover">
+      <Section title="Cover" hint="Shown in the work grid, on the home page and at the top of the project page.">
+        <ShapePicker value={shape} onChange={(s) => set("coverShape", s)} />
         <ImageField
           label="Cover image"
           value={p.cover}
-          onChange={(v) => set("cover", v)}
+          onChange={(cover, up) =>
+            // A new upload picks the closest shape; you can still change it above.
+            onChange({ ...p, cover, ...(up ? { coverShape: nearestShape(up.width, up.height) } : {}) })
+          }
           folder={folder}
-          fixedRatio={disciplines[p.discipline].ratio}
-          fixedRatioNote={`Shown as ${disciplines[p.discipline].ratio.replace(" / ", ":")} in the work grid, the shape used for ${disciplines[p.discipline].label.toLowerCase()}. The image is cropped to fit.`}
+          fixedRatio={coverShapes[shape].ratio}
+          fixedRatioNote="Uploading picks the closest shape automatically. If the image doesn't match the shape exactly, the edges are cropped."
         />
       </Section>
 
@@ -258,6 +272,40 @@ function BlockFields({
         />
       ))}
     </>
+  );
+}
+
+function ShapePicker({ value, onChange }: { value: CoverShape; onChange: (s: CoverShape) => void }) {
+  return (
+    <div role="radiogroup" aria-label="Cover shape" className="grid grid-cols-3 gap-2">
+      {(Object.keys(coverShapes) as CoverShape[]).map((s) => {
+        const on = value === s;
+        return (
+          <button
+            key={s}
+            type="button"
+            role="radio"
+            aria-checked={on}
+            onClick={() => onChange(s)}
+            className={`flex flex-col items-center gap-3 border px-2 pb-3 pt-4 text-center transition-colors ${
+              on ? "border-fg bg-bg-sunk" : "border-line hover:border-muted"
+            }`}
+          >
+            <span className="flex h-10 items-center">
+              <span
+                aria-hidden
+                className={`block h-9 border-2 ${on ? "border-fg" : "border-muted"}`}
+                style={{ aspectRatio: coverShapes[s].ratio }}
+              />
+            </span>
+            <span>
+              <span className="block text-sm font-medium">{coverShapes[s].label}</span>
+              <span className="block font-mono text-[11px] text-muted">{coverShapes[s].example}</span>
+            </span>
+          </button>
+        );
+      })}
+    </div>
   );
 }
 

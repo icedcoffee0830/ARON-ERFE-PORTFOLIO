@@ -13,6 +13,8 @@ export type WorkItem = {
   discipline: Discipline;
   year: number;
   cover: { src: string; alt: string };
+  /** Cover aspect ratio, e.g. "16 / 9". */
+  ratio: string;
 };
 
 type Filter = Discipline | "all";
@@ -34,11 +36,9 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function WorkIndex({
   items,
   labels,
-  ratios,
 }: {
   items: WorkItem[];
   labels: Record<Discipline, string>;
-  ratios: Record<Discipline, string>;
 }) {
   const [filter, setFilter] = useState<Filter>("all");
   const shown = filter === "all" ? items : items.filter((p) => p.discipline === filter);
@@ -109,7 +109,7 @@ export function WorkIndex({
                   transition={{ duration: 0.6, ease }}
                   className={`self-start ${rhythm[i % rhythm.length]}`}
                 >
-                  <Card item={p} label={labels[p.discipline]} ratio={ratios[p.discipline]} priority={i < 2} />
+                  <Card item={p} label={labels[p.discipline]} priority={i < 2} />
                 </motion.li>
               ))}
             </AnimatePresence>
@@ -123,17 +123,15 @@ export function WorkIndex({
 function Card({
   item,
   label,
-  ratio,
   priority,
 }: {
   item: WorkItem;
   label: string;
-  ratio: string;
   priority: boolean;
 }) {
   return (
     <Link href={`/work/${item.slug}`} className="group block">
-      <div className="relative overflow-hidden bg-bg-sunk" style={{ aspectRatio: ratio }}>
+      <div className="relative overflow-hidden bg-bg-sunk" style={{ aspectRatio: item.ratio }}>
         <Image
           src={item.cover.src}
           alt={item.cover.alt}

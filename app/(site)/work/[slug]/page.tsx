@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "@phosphor-icons/react/ssr";
 import {
+  coverShapeOf,
+  coverShapes,
   disciplines,
   getProject,
   getProjects,
@@ -23,11 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return project ? { title: project.title, description: project.summary } : {};
 }
 
-// Cover proportions on the project page, per discipline.
-const coverLayout = {
-  brand: { ratio: "3 / 2", className: "" },
-  ui: { ratio: "16 / 10", className: "" },
-  print: { ratio: "4 / 5", className: "md:ml-auto md:w-7/12" },
+// How wide the cover sits on the project page, per shape. Tall shapes are
+// narrower so the cover never fills more than a screen.
+const coverWidth = {
+  landscape: "",
+  square: "md:ml-auto md:w-8/12",
+  portrait: "md:ml-auto md:w-7/12",
 } as const;
 
 export default async function ProjectPage({ params }: Props) {
@@ -37,7 +40,7 @@ export default async function ProjectPage({ params }: Props) {
 
   const all = getProjects();
   const next = all[(all.findIndex((p) => p.slug === slug) + 1) % all.length];
-  const cover = coverLayout[project.discipline];
+  const shape = coverShapeOf(project);
 
   return (
     <article className="mx-auto max-w-[1400px] px-4 md:px-8">
@@ -82,8 +85,8 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </header>
 
-      <div className={cover.className}>
-        <Frame img={{ ...project.cover, ratio: cover.ratio }} priority sizes="(min-width: 768px) 90vw, 100vw" />
+      <div className={coverWidth[shape]}>
+        <Frame img={{ ...project.cover, ratio: coverShapes[shape].ratio }} priority sizes="(min-width: 768px) 90vw, 100vw" />
       </div>
 
       <div className="flex flex-col gap-20 py-20 md:gap-32 md:py-32">

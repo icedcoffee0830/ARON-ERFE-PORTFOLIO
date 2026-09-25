@@ -2,29 +2,52 @@ import data from "./projects.json";
 
 export type Discipline = "brand" | "ui" | "print";
 
+export type CoverShape = "square" | "landscape" | "portrait";
+
+export const coverShapes: Record<CoverShape, { label: string; ratio: string; example: string }> = {
+  square: { label: "Square", ratio: "1 / 1", example: "1080 × 1080" },
+  landscape: { label: "Landscape", ratio: "16 / 9", example: "1920 × 1080" },
+  portrait: { label: "Portrait", ratio: "4 / 5", example: "1080 × 1350" },
+};
+
 export const disciplines: Record<
   Discipline,
-  { label: string; word: string; description: string; ratio: string }
+  { label: string; word: string; description: string; shape: CoverShape }
 > = {
   brand: {
     label: "Brand & identity",
     word: "Brand",
     description: "Logotypes, visual systems and the rules that keep them consistent.",
-    ratio: "1 / 1",
+    shape: "square",
   },
   ui: {
     label: "UI & product",
     word: "interface",
     description: "Interfaces for apps and websites, from first flow to final screen.",
-    ratio: "16 / 10",
+    shape: "landscape",
   },
   print: {
     label: "Graphic & print",
     word: "print",
     description: "Posters, publications and editorial layouts made for paper.",
-    ratio: "4 / 5",
+    shape: "portrait",
   },
 };
+
+/** The cover's shape: chosen per project, otherwise the discipline's usual shape. */
+export function coverShapeOf(p: Pick<Project, "discipline" | "coverShape">): CoverShape {
+  return p.coverShape ?? disciplines[p.discipline].shape;
+}
+
+/** Closest cover shape for an image's proportions. */
+export function nearestShape(width: number, height: number): CoverShape {
+  const r = width / height;
+  return (Object.keys(coverShapes) as CoverShape[]).reduce((best, s) => {
+    const [w, h] = coverShapes[s].ratio.split(" / ").map(Number);
+    const [bw, bh] = coverShapes[best].ratio.split(" / ").map(Number);
+    return Math.abs(Math.log(r / (w / h))) < Math.abs(Math.log(r / (bw / bh))) ? s : best;
+  });
+}
 
 export type Img = { src: string; alt: string; ratio?: string };
 
@@ -42,6 +65,8 @@ export type Project = {
   deliverables: string[];
   summary: string;
   cover: Img;
+  /** Shape of the cover everywhere it appears. Defaults to the discipline's usual shape. */
+  coverShape?: CoverShape;
   blocks: Block[];
   /** Hidden from the live site. Still visible in `npm run dev` so it can be previewed. */
   draft?: boolean;
