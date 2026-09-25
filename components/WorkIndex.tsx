@@ -38,7 +38,7 @@ export function WorkIndex({
   const shown = filter === "all" ? items : items.filter((p) => p.discipline === filter);
   const track = useRef<HTMLUListElement>(null);
   const [ends, setEnds] = useState({ start: true, end: false });
-  const [current, setCurrent] = useState(0);
+  const frame = useRef<HTMLDivElement>(null);
 
   const tabs: { key: Filter; label: string; count: number }[] = [
     { key: "all", label: "All", count: items.length },
@@ -49,15 +49,17 @@ export function WorkIndex({
     })),
   ];
 
-  // Only discrete values live in state (ends, centred index), updated only when they change.
+  // Only the two end flags live in state, and only update when they change.
   const measure = useCallback(() => {
     const el = track.current;
     if (!el) return;
     const start = el.scrollLeft <= 2;
     const end = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
     setEnds((e) => (e.start === start && e.end === end ? e : { start, end }));
-    const i = centred();
-    setCurrent((c) => (c === i ? c : i));
+    // Keep the arrows level with the middle of the centred cover (cards differ in height on phones).
+    const img = cards()[centred()]?.querySelector<HTMLElement>("div");
+    if (img && frame.current)
+      frame.current.style.setProperty("--arrow-y", `${el.offsetTop + img.offsetTop + img.offsetHeight / 2}px`);
   }, []);
 
   useEffect(() => {
@@ -210,7 +212,7 @@ export function WorkIndex({
 
       {/* Full-width track; the centred card is the focus, with neighbours visible on both sides. Side padding lets the first and last cards reach the middle. */}
       {items.length > 0 && (
-        <div className="relative mt-12 md:mt-16">
+        <div ref={frame} className="relative mt-12 md:mt-16">
         <ul
           ref={track}
           aria-label="Projects"
@@ -220,7 +222,7 @@ export function WorkIndex({
           onPointerCancel={endDrag}
           onClickCapture={onClickCapture}
           onDragStart={(e) => e.preventDefault()}
-          className="relative flex snap-x snap-mandatory items-start gap-5 overflow-x-auto overscroll-x-contain px-[7.5vw] pb-4 [scrollbar-width:none] md:cursor-grab md:gap-8 md:px-[calc(50%_-_280px)] [&::-webkit-scrollbar]:hidden"
+          className="relative flex snap-x snap-mandatory items-center gap-5 overflow-x-auto overscroll-x-contain px-[7.5vw] pb-4 [scrollbar-width:none] md:cursor-grab md:items-start md:gap-8 md:px-[calc(50%_-_280px)] [&::-webkit-scrollbar]:hidden"
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {shown.map((p, i) => (
@@ -239,50 +241,12 @@ export function WorkIndex({
             ))}
           </AnimatePresence>
         </ul>
-        {/* Centred on the images (the caption and padding below add about 5.5rem). */}
+        {/* Level with the middle of the centred cover (--arrow-y is set as the row scrolls). */}
         <ArrowButton side="left" label="Previous projects" hidden={ends.start} onClick={() => page(-1)} />
         <ArrowButton side="right" label="More projects" hidden={ends.end} onClick={() => page(1)} />
-        {/* Phones: position and arrows sit below the row instead of over the images. */}
-        <div className="mt-2 flex items-center justify-between px-4 md:hidden">
-          <span className="font-mono text-sm text-muted" aria-live="polite">
-            {Math.min(current + 1, shown.length)} / {shown.length}
-          </span>
-          <div className="flex gap-2">
-            <SmallArrow label="Previous project" disabled={ends.start} onClick={() => page(-1)}>
-              <ArrowLeft size={18} weight="bold" />
-            </SmallArrow>
-            <SmallArrow label="Next project" disabled={ends.end} onClick={() => page(1)}>
-              <ArrowRight size={18} weight="bold" />
-            </SmallArrow>
-          </div>
-        </div>
         </div>
       )}
     </section>
-  );
-}
-
-function SmallArrow({
-  label,
-  disabled,
-  onClick,
-  children,
-}: {
-  label: string;
-  disabled: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      disabled={disabled}
-      onClick={onClick}
-      className="inline-flex size-11 items-center justify-center border border-line transition-colors active:scale-[0.96] active:border-fg disabled:opacity-35"
-    >
-      {children}
-    </button>
   );
 }
 
@@ -305,7 +269,7 @@ function ArrowButton({
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : 0}
       onClick={onClick}
-      className={`absolute top-[calc(50%-2.75rem)] z-10 hidden size-12 -translate-y-1/2 items-center justify-center border border-line bg-bg/90 text-fg shadow-[0_12px_32px_-14px_rgb(0_0_0/0.55)] backdrop-blur-sm transition-[opacity,background-color,border-color] duration-300 hover:border-fg hover:bg-bg active:scale-[0.96] md:inline-flex md:size-14 ${
+      className={`absolute top-[var(--arrow-y,calc(50%-2.75rem))] z-10 inline-flex size-11 -translate-y-1/2 items-center justify-center border border-line bg-bg/90 text-fg shadow-[0_12px_32px_-14px_rgb(0_0_0/0.55)] backdrop-blur-sm transition-[top,opacity,background-color,border-color] duration-300 hover:border-fg hover:bg-bg active:scale-[0.96] md:size-14 ${
         side === "left" ? "left-2 md:left-6" : "right-2 md:right-6"
       } ${hidden ? "pointer-events-none opacity-0" : "opacity-100"}`}
     >
