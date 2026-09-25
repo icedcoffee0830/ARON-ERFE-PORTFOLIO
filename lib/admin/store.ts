@@ -26,11 +26,12 @@ export function storeMode(): "github" | "local" | "unavailable" {
   return "unavailable";
 }
 
-/** Public paths the editor may write images to: /portrait.* and /work/<slug>/<file>. */
+/** Public paths the editor may write images to: /portrait-*, /logo-*, /logo-dark-* and /work/<slug>/<file>. */
 export function isAllowedImagePath(p: string) {
   return (
     /^\/work\/[a-z0-9-]{1,80}\/[a-z0-9-]{1,120}\.(webp|jpg|jpeg|png|gif)$/.test(p) ||
-    /^\/portrait-[a-z0-9-]{1,40}\.(webp|jpg|jpeg|png)$/.test(p)
+    /^\/portrait-[a-z0-9-]{1,40}\.(webp|jpg|jpeg|png)$/.test(p) ||
+    /^\/logo(-dark)?-[a-z0-9]{1,40}\.(svg|webp|png|jpg|jpeg)$/.test(p)
   );
 }
 

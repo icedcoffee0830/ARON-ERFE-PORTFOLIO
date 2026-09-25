@@ -10,6 +10,8 @@ const TYPES: Record<string, string> = {
   "image/jpeg": "jpg",
   "image/png": "png",
   "image/gif": "gif",
+  // Logos only. Shown through <img>, where SVG scripts never run.
+  "image/svg+xml": "svg",
 };
 
 export async function POST(req: Request) {
@@ -21,8 +23,13 @@ export async function POST(req: Request) {
   const folder = String(form?.get("folder") ?? "");
   if (!(file instanceof File)) return NextResponse.json({ error: "No file received." }, { status: 400 });
 
+  const isLogo = folder === "logo" || folder === "logo-dark";
   const ext = TYPES[file.type];
-  if (!ext) return NextResponse.json({ error: "Use a JPG, PNG, WebP or GIF image." }, { status: 415 });
+  if (!ext || (ext === "svg" && !isLogo))
+    return NextResponse.json(
+      { error: isLogo ? "Use an SVG, PNG, WebP or JPG file." : "Use a JPG, PNG, WebP or GIF image." },
+      { status: 415 },
+    );
   if (file.size > MAX_BYTES)
     return NextResponse.json({ error: "That image is too large (4 MB max)." }, { status: 413 });
 
@@ -31,6 +38,8 @@ export async function POST(req: Request) {
   const publicPath =
     folder === "portrait"
       ? `/portrait-${Date.now().toString(36)}.${ext}`
+      : isLogo
+        ? `/${folder}-${Date.now().toString(36)}.${ext}`
       : SLUG_RE.test(folder)
         ? `/work/${folder}/${id}.${ext}`
         : null;

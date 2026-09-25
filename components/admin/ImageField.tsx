@@ -16,6 +16,11 @@ export function ImageField({
   folder,
   fixedRatio,
   fixedRatioNote,
+  fit = "cover",
+  tone,
+  accept = "image/jpeg,image/png,image/webp,image/gif",
+  altHint = "What the image shows, for screen readers and search engines.",
+  showAlt = true,
 }: {
   label: string;
   value: Img;
@@ -25,6 +30,13 @@ export function ImageField({
   /** When set, the frame is decided elsewhere (e.g. by discipline) and no ratio picker is shown. */
   fixedRatio?: string;
   fixedRatioNote?: string;
+  /** "contain" shows the whole image (logos); "cover" crops like the site does. */
+  fit?: "cover" | "contain";
+  /** Forces a light or dark preview background, to check a logo against it. */
+  tone?: "light" | "dark";
+  accept?: string;
+  altHint?: string;
+  showAlt?: boolean;
 }) {
   const { upload, resolve } = useEditor();
   const input = useRef<HTMLInputElement>(null);
@@ -82,7 +94,9 @@ export function ImageField({
           }}
           disabled={busy}
           aria-label={value.src ? `Replace ${label.toLowerCase()}` : `Upload ${label.toLowerCase()}`}
-          className={`group relative w-full overflow-hidden border bg-bg-sunk transition-colors ${
+          className={`group relative w-full overflow-hidden border transition-colors ${
+            tone === "light" ? "bg-[#f2f2f0] text-[#5c5c58]" : tone === "dark" ? "bg-[#111110] text-[#9b9b96]" : "bg-bg-sunk"
+          } ${
             over ? "border-accent" : "border-line hover:border-muted"
           }`}
           style={{ aspectRatio: ratio }}
@@ -93,10 +107,10 @@ export function ImageField({
               src={resolve(value.src)}
               alt=""
               onError={() => setBrokenSrc(value.src)}
-              className={`absolute inset-0 size-full object-cover transition-opacity ${busy ? "opacity-40" : ""}`}
+              className={`absolute inset-0 size-full ${fit === "contain" ? "object-contain p-4" : "object-cover"} transition-opacity ${busy ? "opacity-40" : ""}`}
             />
           ) : (
-            <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-3 text-center text-[13px] text-muted">
+            <span className={`absolute inset-0 flex flex-col items-center justify-center gap-2 p-3 text-center text-[13px] ${tone ? "" : "text-muted"}`}>
               {value.src && broken ? (
                 <>
                   <ImageSquare size={22} />
@@ -118,13 +132,13 @@ export function ImageField({
         </button>
 
         <div className="flex flex-col gap-4">
-          <TextInput
+          {showAlt && (<TextInput
             label="Description (alt text)"
-            hint="What the image shows, for screen readers and search engines."
+            hint={altHint}
             value={value.alt}
             onChange={(alt) => onChange({ ...value, alt })}
             placeholder="e.g. Logo on the shop sign"
-          />
+          />)}
           {!fixedRatio && value.src && (
             <Select
               label="Frame shape"
@@ -158,7 +172,7 @@ export function ImageField({
       <input
         ref={input}
         type="file"
-        accept="image/jpeg,image/png,image/webp,image/gif"
+        accept={accept}
         className="hidden"
         onChange={(e) => take(e.target.files?.[0])}
       />

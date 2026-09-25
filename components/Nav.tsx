@@ -12,10 +12,28 @@ export function Nav() {
     <header className="sticky top-0 z-40 border-b border-line/70 bg-bg/85 backdrop-blur-md">
       <nav
         aria-label="Primary"
-        className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 md:px-8"
+        className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-6 px-4 md:px-8"
       >
-        <Link href="/" className="text-lg font-semibold tracking-tight">
-          {site.name}
+        <Link href="/" className="flex min-w-0 items-center gap-3 text-lg font-semibold tracking-tight">
+          {site.logo ? (
+            <>
+              <picture className="flex shrink-0">
+                {site.logoDark && (
+                  <source srcSet={site.logoDark} media="(prefers-color-scheme: dark)" />
+                )}
+                {/* Plain img: logos are small, and SVGs pass through untouched. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={site.logo}
+                  alt={site.showNameWithLogo ? "" : site.name}
+                  className="h-8 w-auto max-w-[180px] object-contain object-left"
+                />
+              </picture>
+              {site.showNameWithLogo && <span className="truncate">{site.name}</span>}
+            </>
+          ) : (
+            site.name
+          )}
         </Link>
         <ul className="flex items-center gap-6 text-sm md:gap-10">
           {items.map((item) => (

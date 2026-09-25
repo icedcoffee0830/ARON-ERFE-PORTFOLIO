@@ -3,7 +3,7 @@
 import { Plus, Trash } from "@phosphor-icons/react";
 import type { Site } from "@/content/site";
 import { ImageField } from "./ImageField";
-import { Button, IconButton, TextArea, TextInput } from "./ui";
+import { Button, IconButton, TextArea, TextInput, Toggle } from "./ui";
 
 export function SiteForm({ site, onChange }: { site: Site; onChange: (s: Site) => void }) {
   const set = <K extends keyof Site>(k: K, v: Site[K]) => onChange({ ...site, [k]: v });
@@ -36,6 +36,47 @@ export function SiteForm({ site, onChange }: { site: Site; onChange: (s: Site) =
           value={site.statement}
           onChange={(v) => set("statement", v)}
         />
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <div>
+          <h2 className="text-lg font-semibold tracking-tight">Logo</h2>
+          <p className="mt-1 text-sm text-muted">
+            Shown at the top left of every page, 32px tall. Without a logo, your name is shown instead.
+            SVG gives the sharpest result; a PNG with a transparent background also works.
+          </p>
+        </div>
+        <ImageField
+          label="Logo"
+          value={{ src: site.logo ?? "", alt: site.name }}
+          folder="logo"
+          fixedRatio="3 / 1"
+          fit="contain"
+          tone="light"
+          showAlt={false}
+          accept="image/svg+xml,image/png,image/webp,image/jpeg"
+          fixedRatioNote="Previewed on the light background."
+          onChange={(v) => set("logo", v.src || null)}
+        />
+        <ImageField
+          label="Logo for dark mode (optional)"
+          value={{ src: site.logoDark ?? "", alt: site.name }}
+          folder="logo-dark"
+          fixedRatio="3 / 1"
+          fit="contain"
+          tone="dark"
+          showAlt={false}
+          accept="image/svg+xml,image/png,image/webp,image/jpeg"
+          fixedRatioNote="Visitors whose device is in dark mode see this version. Upload a light-coloured logo here if your main one is dark."
+          onChange={(v) => set("logoDark", v.src || null)}
+        />
+        {site.logo && (
+          <Toggle
+            label="Show your name next to the logo"
+            checked={site.showNameWithLogo}
+            onChange={(v) => set("showNameWithLogo", v)}
+          />
+        )}
       </section>
 
       <section className="flex flex-col gap-6">

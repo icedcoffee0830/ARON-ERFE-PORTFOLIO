@@ -38,7 +38,9 @@ export function validate(site: Site, projects: Project[]): string[] {
   if (!str(site.statement, 1500)) out.push("Site details: statement is too long.");
   if (!str(site.email, 200) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(site.email))
     out.push("Site details: enter a valid email address.");
-  if (site.portrait !== null && !src(site.portrait)) out.push("Site details: invalid portrait.");
+  if (site.portrait != null && !src(site.portrait)) out.push("Site details: invalid portrait.");
+  if (site.logo != null && !src(site.logo)) out.push("Site details: invalid logo.");
+  if (site.logoDark != null && !src(site.logoDark)) out.push("Site details: invalid dark mode logo.");
   if (!Array.isArray(site.links)) out.push("Site details: invalid links.");
   else
     site.links.forEach((l, i) => {

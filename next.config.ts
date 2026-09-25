@@ -8,6 +8,17 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "fastly.picsum.photos" },
     ],
   },
+  // Uploaded SVG logos can never run scripts, even when opened directly.
+  async headers() {
+    return [
+      {
+        source: "/:file(logo.*\\.svg)",
+        headers: [
+          { key: "Content-Security-Policy", value: "default-src 'none'; style-src 'unsafe-inline'; sandbox" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -11,6 +11,21 @@ export type Prepared = { file: File; width: number; height: number };
 export async function prepareImage(input: File): Promise<Prepared> {
   if (!input.type.startsWith("image/")) throw new Error("That file is not an image.");
 
+  // Vector logos stay vector; only their proportions are measured.
+  if (input.type === "image/svg+xml") {
+    const url = URL.createObjectURL(input);
+    try {
+      const el = new Image();
+      el.src = url;
+      await el.decode();
+      return { file: input, width: el.naturalWidth || 300, height: el.naturalHeight || 100 };
+    } catch {
+      throw new Error("This SVG can't be read. Try exporting it again, or use a PNG.");
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+
   const bitmap = await createImageBitmap(input).catch(() => {
     throw new Error("This image format can't be read. Export it as JPG or PNG.");
   });
