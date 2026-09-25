@@ -384,7 +384,7 @@
     "deliverables": [],
     "summary": "",
     "cover": {
-      "src": "/work/eat-and-munch/muh39pes-asset-1.webp",
+      "src": "/work/eat-and-munch/muh3p6ft-mockup-storefront.webp",
       "alt": "Eat and Munch"
     },
     "blocks": [
@@ -393,6 +393,16 @@
         "images": [
           {
             "src": "/work/eat-and-munch/muh3c0ni-eat-and-munch-branding-identity.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3pren-flyers-cookies-erfe.webp",
+            "alt": "",
+            "ratio": "1697 / 2400"
+          },
+          {
+            "src": "/work/eat-and-munch/muh3ptec-flyers.webp",
             "alt": "",
             "ratio": "1697 / 2400"
           }
@@ -424,11 +434,6 @@
         ]
       },
       {
-        "type": "text",
-        "heading": "Eat and Munch",
-        "body": ""
-      },
-      {
         "type": "gallery",
         "images": [
           {
@@ -447,35 +452,15 @@
         "type": "gallery",
         "images": [
           {
-            "src": "/work/eat-and-munch/muh3b2pn-flyers-cookies-erfe.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3b4td-flyers.webp",
-            "alt": "",
-            "ratio": "1697 / 2400"
-          }
-        ]
-      },
-      {
-        "type": "gallery",
-        "images": [
-          {
             "src": "/work/eat-and-munch/muh3bc23-mockup-signage.webp",
             "alt": "",
             "ratio": "400 / 267"
-          },
-          {
-            "src": "/work/eat-and-munch/muh3bdr4-mockup-storefront.webp",
-            "alt": "",
-            "ratio": "3 / 2"
           }
         ]
       }
     ],
     "draft": false,
-    "coverShape": "square"
+    "coverShape": "landscape"
   },
   {
     "slug": "buwan-ng-wika-2026",
