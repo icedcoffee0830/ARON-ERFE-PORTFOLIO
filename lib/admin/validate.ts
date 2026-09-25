@@ -80,5 +80,10 @@ function blockCheck(b: Block, where: string, out: string[]) {
   } else if (b?.type === "pair") {
     if (!Array.isArray(b.images) || b.images.length !== 2) out.push(`${where}: needs two images.`);
     else b.images.forEach((i, k) => img(i, `${where}, image ${k + 1}`, out));
+  } else if (b?.type === "gallery") {
+    if (!Array.isArray(b.images) || b.images.length === 0)
+      out.push(`${where}: add at least one image, or delete the block.`);
+    else if (b.images.length > 60) out.push(`${where}: a gallery holds up to 60 images.`);
+    else b.images.forEach((i, k) => img(i, `${where}, image ${k + 1}`, out));
   } else out.push(`${where}: unknown block type.`);
 }

@@ -111,7 +111,7 @@ export function Editor({
       cover: { src: "", alt: "" },
       blocks: [
         { type: "text", heading: "Brief", body: "" },
-        { type: "image", size: "full", image: { src: "", alt: "" } },
+        { type: "gallery", images: [] },
       ],
       draft: true,
     };

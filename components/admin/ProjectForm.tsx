@@ -4,8 +4,7 @@ import {
   ArrowDown,
   ArrowSquareOut,
   ArrowUp,
-  Columns,
-  ImageSquare,
+  Images,
   TextT,
   Trash,
 } from "@phosphor-icons/react";
@@ -20,6 +19,7 @@ import {
   type Project,
 } from "@/content/projects";
 import { slugify } from "@/lib/admin/validate";
+import { GalleryField } from "./GalleryField";
 import { ImageField } from "./ImageField";
 import { Button, IconButton, Select, TextArea, TextInput, Toggle } from "./ui";
 
@@ -27,6 +27,7 @@ const blockNames: Record<Block["type"], string> = {
   text: "Text",
   image: "Image",
   pair: "Two images",
+  gallery: "Images",
 };
 
 export function ProjectForm({
@@ -60,9 +61,11 @@ export function ProjectForm({
     const b: Block =
       type === "text"
         ? { type, heading: "", body: "" }
-        : type === "image"
-          ? { type, size: "full", image: { ...empty } }
-          : { type, images: [{ ...empty }, { ...empty }] };
+        : type === "gallery"
+          ? { type, images: [] }
+          : type === "image"
+            ? { type, size: "full", image: { ...empty } }
+            : { type, images: [{ ...empty }, { ...empty }] };
     set("blocks", [...p.blocks, b]);
   };
 
@@ -197,11 +200,8 @@ export function ProjectForm({
           <Button onClick={() => addBlock("text")}>
             <TextT size={16} /> Add text
           </Button>
-          <Button onClick={() => addBlock("image")}>
-            <ImageSquare size={16} /> Add image
-          </Button>
-          <Button onClick={() => addBlock("pair")}>
-            <Columns size={16} /> Add two images
+          <Button onClick={() => addBlock("gallery")}>
+            <Images size={16} /> Add images
           </Button>
         </div>
       </Section>
@@ -241,6 +241,8 @@ function BlockFields({
         <TextArea label="Text" rows={5} value={b.body} onChange={(body) => onChange({ ...b, body })} />
       </>
     );
+  if (b.type === "gallery")
+    return <GalleryField value={b.images} folder={folder} onChange={(images) => onChange({ ...b, images })} />;
   if (b.type === "image")
     return (
       <>

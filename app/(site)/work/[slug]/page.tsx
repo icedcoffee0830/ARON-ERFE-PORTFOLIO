@@ -13,6 +13,7 @@ import {
   type Img,
 } from "@/content/projects";
 import { Reveal } from "@/components/Reveal";
+import { Gallery } from "@/components/Gallery";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -148,6 +149,8 @@ function BlockView({ block }: { block: Block }) {
           <Frame img={block.image} sizes="(min-width: 768px) 90vw, 100vw" />
         </Reveal>
       );
+    case "gallery":
+      return <Gallery images={block.images} />;
     case "pair":
       return (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">

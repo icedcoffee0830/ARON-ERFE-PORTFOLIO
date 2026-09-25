@@ -54,7 +54,11 @@ export type Img = { src: string; alt: string; ratio?: string };
 export type Block =
   | { type: "text"; heading: string; body: string }
   | { type: "image"; image: Img; size?: "full" | "inset" }
-  | { type: "pair"; images: [Img, Img] };
+  | { type: "pair"; images: [Img, Img] }
+  /** Any number of images, laid out automatically by their proportions. */
+  | { type: "gallery"; images: Img[] };
+
+export const GALLERY_MAX = 60;
 
 export type Project = {
   slug: string;
