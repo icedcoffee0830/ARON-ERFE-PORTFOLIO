@@ -1,6 +1,7 @@
 import { site } from "@/content/site";
 import { coverShapeOf, coverShapes, disciplines, getProjects, type Discipline } from "@/content/projects";
 import { Hero, type HeroCover } from "@/components/Hero";
+import { DotField } from "@/components/DotField";
 import { WorkIndex } from "@/components/WorkIndex";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
@@ -22,7 +23,11 @@ export default function Home() {
 
   return (
     <>
-      <Hero intro={site.intro} words={pick((d) => disciplines[d].word)} covers={covers} />
+      {/* The dot field sits behind the hero and fades out at the edges and towards the work. */}
+      <div className="relative isolate">
+        <DotField className="absolute inset-0 -z-10 size-full [mask-image:radial-gradient(ellipse_90%_80%_at_50%_40%,black_45%,transparent_100%)]" />
+        <Hero intro={site.intro} words={pick((d) => disciplines[d].word)} covers={covers} />
+      </div>
       <WorkIndex
         items={projects.map((p) => ({
           slug: p.slug,
